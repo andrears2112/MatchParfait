@@ -6,86 +6,98 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.bumptech.glide.Glide
 import com.example.matchparfait.MyApp
 import com.example.matchparfait.R
 import com.example.matchparfait.view.fragments.ShopBag
 import com.example.matchparfait.model.entitys.ProductColor
 import com.example.matchparfait.model.entitys.ProductItem
+import com.example.matchparfait.model.entitys.ProductShopBag
+import com.example.matchparfait.utils.Helpers
+import com.example.matchparfait.view.components.QuantityController
+import com.example.matchparfait.view.components.QuantityControllerDelegate
 
-class ShopBagAdapter (private val dataList: List<Pair<ProductItem, ProductColor?>>, private val activity: ShopBag) :
-    RecyclerView.Adapter<ShopBagAdapter.ViewHolder>() {
+class ShopBagAdapter(private val productList: MutableList<ProductShopBag>, private val listener: OnProductClickListener) :
+    RecyclerView.Adapter<ShopBagAdapter.ProductViewHolder>(), QuantityControllerDelegate{
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val productName: TextView = itemView.findViewById(R.id.name_product)
-        val productBrand: TextView = itemView.findViewById(R.id.brand_product)
-        val image : ImageView = itemView.findViewById(R.id.img_product)
-        //val colorName: TextView = itemView.findViewById(R.id.color_name)
-        val productColor: ImageView = itemView.findViewById(R.id.color)
-        val recomended : ImageView = itemView.findViewById(R.id.recommended)
-        val delete : ImageView = itemView.findViewById(R.id.delete)
-        val price : TextView = itemView.findViewById(R.id.price)
+    private var filteredProductList: List<ProductShopBag> = productList
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.shop_bag_card, parent, false)
+        return ProductViewHolder(itemView)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.shop_bag_card, parent, false)
-        return ViewHolder(view)
-    }
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        val product = filteredProductList[position]
+        holder.productName.text = product.productName
+        holder.productBrand.text = product.productBrand
+        holder.productPrice.text = "$${product.price}.00"
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val (productItem, productColor) = dataList[position]
-        val sharedPreferences = holder.itemView.context.getSharedPreferences("InfoApp", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
+        Glide.with(holder.itemView.context)
+            .load(product.photo)
+            .into(holder.productImage)
 
-        holder.productName.text = productItem.name?.split(" ")?.joinToString(" ") { it.capitalize() }
-        holder.productBrand.text = productItem.brand?.toUpperCase()
-        holder.image.load(productItem.imageLink)
-        val precioCalculado = productItem.price!!.toDouble() * 20
-        val precioFormateado = String.format("%.2f", precioCalculado)
-        holder.price.text = "$$precioFormateado"
-        if(productColor != null){
-            //holder.colorName.visibility = View.VISIBLE
-            holder.productColor.visibility = View.VISIBLE
-            //holder.colorName.text = productColor?.colourName
-            holder.productColor.backgroundTintList = ColorStateList.valueOf((Color.parseColor(productColor?.hexValue)))
+        if(product.color != ""){
+            val color = Color.parseColor("#"+product.color)
+            holder.productColor.backgroundTintList = ColorStateList.valueOf(color)
         }
-        else{
-            //holder.colorName.visibility = View.GONE
+        else {
             holder.productColor.visibility = View.GONE
         }
 
-        val isTagListValid = productItem.tagList?.isNotEmpty() == true
-        val isOilFree = isTagListValid && productItem.tagList!!.contains("oil free")
-        if (isOilFree) {
-            editor.putInt("recomend", 1)
-            holder.recomended.visibility = View.VISIBLE
+        if (product.classification != "0" && product.classification != null && product.classification != "") {
+            holder.poductRecommended.visibility = View.VISIBLE
         } else {
-            editor.putInt("recomend", 0)
-            holder.recomended.visibility = View.GONE
+            holder.poductRecommended.visibility = View.GONE
         }
 
-        holder.delete.setOnClickListener{
-            eliminarProducto(position, activity = activity as ShopBag)
+        holder.itemView.setOnClickListener {
+            listener.onProductClickShopBag(product)
         }
+
+        holder.btnQuantity.setOnClickListener {
+
+        }
+
+        holder.btnRemove.setOnClickListener {
+            listener.onRemoveShopBag(product)
+            removeProductFromWishList(product)
+        }
+
+        holder.btnQuantity.setProductShopBag(product)
+        holder.btnQuantity.setDelegate(object : QuantityControllerDelegate {
+            override fun OnChangeAmount(product: ProductShopBag, newQuantity: Int) {
+                (listener as? QuantityControllerDelegate)?.OnChangeAmount(product, newQuantity)
+            }
+        })
+        var prod = Helpers.getProducts().find { it.productId == product.productId }
+        holder.btnQuantity.setMaxQuantity(prod!!.cantidad)
+        holder.btnQuantity.setQuantity(product.cantidad)
     }
 
-    fun eliminarProducto(position: Int, activity : ShopBag) {
-        val productoAEliminar = getItem(position)
-        MyApp.shopBag.remove(productoAEliminar)
-        notifyItemRemoved(position)
-        notifyItemRangeChanged(position, itemCount)
-        activity.actualizarTotal()
+    override fun getItemCount() = filteredProductList.size
+
+    class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val productImage: ImageView = itemView.findViewById(R.id.img_product)
+        val productName: TextView = itemView.findViewById(R.id.name_product)
+        val productBrand: TextView = itemView.findViewById(R.id.brand_product)
+        val productPrice: TextView = itemView.findViewById(R.id.price_product)
+        val productColor: ImageView = itemView.findViewById(R.id.color)
+        val poductRecommended: ImageView = itemView.findViewById(R.id.recommended)
+        val btnQuantity: QuantityController = itemView.findViewById(R.id.quantity_controller)
+        val btnRemove: ImageView = itemView.findViewById(R.id.delete)
     }
 
-    fun getItem(position: Int): Pair<ProductItem, ProductColor?> {
-        return dataList[position]
-    }
-
-    override fun getItemCount(): Int {
-        return dataList.size
+    fun removeProductFromWishList(product: ProductShopBag) {
+        val index = productList.indexOf(product)
+        if (index != -1) {
+            productList.removeAt(index)
+            notifyItemRemoved(index)
+        }
     }
 }
