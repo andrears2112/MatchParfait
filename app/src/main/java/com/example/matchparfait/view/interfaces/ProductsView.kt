@@ -1,6 +1,7 @@
 package com.example.matchparfait.view.interfaces
 
 import com.example.matchparfait.model.entitys.Product
+import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
 import com.example.matchparfait.model.entitys.ShoppingCartRequest
 
@@ -8,6 +9,9 @@ interface ProductsView {
     fun OnProductsGetted(products : List<Product>){}
 
     fun OnErrorGettingProducts(message : String){}
+    fun OnSuccesGettingCart(products : List<ProductShopBag>){}
+
+    fun OnErrorGettingCart(message: String){}
 
     fun OnSuccessAddingCart(){}
 
