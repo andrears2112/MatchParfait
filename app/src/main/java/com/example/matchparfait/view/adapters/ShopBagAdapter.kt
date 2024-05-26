@@ -100,4 +100,12 @@ class ShopBagAdapter(private val productList: MutableList<ProductShopBag>, priva
             notifyItemRemoved(index)
         }
     }
+
+    fun updateProductPrice(productId: String, newPrice: Int) {
+        val index = productList.indexOfFirst { it.productId == productId }
+        if (index != -1) {
+            productList[index].price = newPrice
+            notifyItemChanged(index)
+        }
+    }
 }
