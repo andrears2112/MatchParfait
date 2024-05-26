@@ -8,7 +8,9 @@ import com.example.matchparfait.model.entitys.ShoppingCartRequest
 import com.example.matchparfait.model.entitys.WishListRequest
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.HTTP
 import retrofit2.http.Header
 import retrofit2.http.POST
 
@@ -36,9 +38,9 @@ interface ProductsServices {
         @Header("Authorization") str: String)
             : Call<Wrapper<ProductWishList>>
 
-    @GET("/api/wishList")
+    @HTTP(method = "DELETE", path = "/api/wishList", hasBody = true)
     fun DeleteWishList(
         @Header("Authorization") str: String,
-        @Body wish_listId : String)
+        @Body prod : ProductWishList)
             : Call<Wrapper<ResponseService>>
 }
