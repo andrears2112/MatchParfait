@@ -7,8 +7,10 @@ data class ShoppingCartRequest(
 )
 
 data class ShoppingCartUpdateRequest(
-    val cartId: String = "",
-    val cantidad : Int = 0
+    val cartId : String = "",
+    val productId : String = "",
+    val cantidad : Int = 0,
+    val color : String = "",
 )
 
 data class WishListRequest(
