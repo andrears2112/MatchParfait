@@ -95,12 +95,12 @@ class WishList : Fragment(), ProductsView, OnProductClickListener {
 
     override fun onRemoveWishList(product: ProductWishList) {
         this.prodToDelete = product
-        this.prodPresenter.DeleteWishList(this.prodToDelete.wish_listId)
+        this.prodPresenter.DeleteWishList(this.prodToDelete)
     }
 
     override fun OnSuccessAddingCart() {
         Log.d("OK SHOP", ":))")
-        this.prodPresenter.DeleteWishList(this.prodToDelete.wish_listId)
+        this.prodPresenter.DeleteWishList(this.prodToDelete)
     }
 
     override fun OnErrorAddindgCart(message: String) {
