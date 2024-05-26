@@ -40,7 +40,7 @@ interface ProductsServices {
         @Body product: ShoppingCartUpdateRequest)
             : Call<Wrapper<ResponseService>>
 
-    @POST("/api/shoppingCart")
+    @HTTP(method = "PUT", path = "/api/shoppingCart", hasBody = true)
     fun EditQuantityShoppingCart(
         @Header("Authorization") str: String,
         @Body product: ShoppingCartUpdateRequest)
