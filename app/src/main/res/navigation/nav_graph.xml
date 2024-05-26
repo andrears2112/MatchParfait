@@ -17,4 +17,7 @@
     <fragment android:id="@+id/wishList"
         android:name="com.example.matchparfait.view.fragments.WishList"
         tools:layout="@layout/fragment_recycler_basic"/>
+    <fragment android:id="@+id/shop_bag"
+        android:name="com.example.matchparfait.view.fragments.ShopBag"
+        tools:layout="@layout/fragment_shop_bag"/>
 </navigation>

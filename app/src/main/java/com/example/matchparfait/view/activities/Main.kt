@@ -40,7 +40,7 @@ class Main : AppCompatActivity(), View.OnClickListener {
             navController.navigate(R.id.searchProduct)
         }
         if (p0!!.id == this.shop_bag.id) {
-
+            navController.navigate(R.id.shop_bag)
         }
         if (p0!!.id == this.wishList.id) {
             navController.navigate(R.id.wishList)
