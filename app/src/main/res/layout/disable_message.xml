@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#FFFCF7">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:tint="#F00D38"
+        android:src="@drawable/ic_triangle_exclamation"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textAlignment="center"
+        android:textColor="#2F0A0A"
+        android:fontFamily="serif"
+        android:textSize="20dp"
+        android:text="¡OH NO!\nOcurrió un problema\n intenta más tarde"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginLeft="28dp"
+        android:backgroundTint="#9B0E28"
+        app:cornerRadius="28dp"
+        android:textColor="#FFFCF7"
+        android:text="ACEPTAR"/>
+
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="principal">#F00D38</color>
+    <color name="secondary">#9B0E28</color>
+    <color name="subheadings">#440707</color>
+    <color name="text_gray">#4D3F3F</color>
+    <color name="background">#FFFCF7</color>
+    <color name="borderline">#EBEAED</color>
+    <color name="text_dark">#391414</color>
+    <color name="text_hint">#A19FAB</color>
+    <color name="yellow">#FAB005</color>
+</resources>

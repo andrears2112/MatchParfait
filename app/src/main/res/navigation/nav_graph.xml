@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/principal">
+
+    <fragment android:id="@+id/searchProduct"
+        android:name="com.example.matchparfait.view.fragments.SearchProduct"
+        tools:layout="@layout/fragment_search"/>
+    <fragment android:id="@+id/detailProduct"
+        android:name="com.example.matchparfait.view.fragments.ProductInfo"
+        tools:layout="@layout/fragment_product_info"/>
+    <fragment android:id="@+id/principal"
+        android:name="com.example.matchparfait.view.fragments.Principal"
+        tools:layout="@layout/fragment_principal"/>
+    <fragment android:id="@+id/wishList"
+        android:name="com.example.matchparfait.view.fragments.WishList"
+        tools:layout="@layout/fragment_recycler_basic"/>
+</navigation>

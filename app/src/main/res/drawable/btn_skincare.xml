@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:drawable="@drawable/skincare_bg" />
+    <item
+        android:drawable="@drawable/ic_skincare"
+        android:right="35dp"
+        android:left="35dp"
+        android:top="45dp"
+        android:bottom="45dp"/>
+
+</layer-list>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Cambiar el color principal aquí -->
+        <item name="colorPrimary">#FF0057</item>
+        <!-- Otros atributos del tema -->
+    </style>
+
+    <!-- styles.xml (o en res/values-v21/styles.xml) -->
+    <style name="CustomRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_rating_bar</item>
+        <item name="android:minHeight">48dp</item> <!-- Cambia esto según tu preferencia -->
+        <item name="android:maxHeight">48dp</item> <!-- Cambia esto según tu preferencia -->
+    </style>
+
+</resources>
