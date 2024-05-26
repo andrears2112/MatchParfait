@@ -5,6 +5,7 @@ import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
 import com.example.matchparfait.model.entitys.ShoppingCartRequest
+import com.example.matchparfait.model.entitys.ShoppingCartUpdateRequest
 import com.example.matchparfait.model.entitys.WishListRequest
 import com.example.matchparfait.model.repositoy.ProductsRepositoryImpl
 import com.example.matchparfait.model.repositoy.interfaces.ProductsRepository
@@ -45,6 +46,30 @@ class ProductsPresenterImpl(view : ProductsView, context: Context) : ProductsPre
 
     override fun OnErrorAddindgCart(message: String){
         this.productsView.OnErrorAddindgCart(message)
+    }
+
+    override fun DeleteShoppingCart(product : ShoppingCartUpdateRequest){
+        this.productsRepo.DeleteShoppingCart(product)
+    }
+
+    override fun OnDeleteOnCartSucces(){
+        this.productsView.OnDeleteOnCartSucces()
+    }
+
+    override fun OnErrorDeleteCart(message: String){
+        this.productsView.OnErrorDeleteCart(message)
+    }
+
+    override fun EditQuantityShoppingCart(product: ShoppingCartUpdateRequest){
+        this.productsRepo.EditQuantityShoppingCart(product)
+    }
+
+    override fun OnSuccesEditQuantity(){
+        this.productsView.OnSuccesEditQuantity()
+    }
+
+    override fun OnErrorEditQuantity(message: String){
+        this.productsView.OnErrorEditQuantity(message)
     }
 
     override fun GetShoppingCart(){

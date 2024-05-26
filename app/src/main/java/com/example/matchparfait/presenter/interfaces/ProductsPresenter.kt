@@ -4,6 +4,7 @@ import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
 import com.example.matchparfait.model.entitys.ShoppingCartRequest
+import com.example.matchparfait.model.entitys.ShoppingCartUpdateRequest
 import com.example.matchparfait.model.entitys.WishListRequest
 
 interface ProductsPresenter {
@@ -25,6 +26,18 @@ interface ProductsPresenter {
     fun OnSuccessAddingCart(){}
 
     fun OnErrorAddindgCart(message: String){}
+
+    fun DeleteShoppingCart(product : ShoppingCartUpdateRequest){}
+
+    fun OnDeleteOnCartSucces(){}
+
+    fun OnErrorDeleteCart(message: String){}
+
+    fun EditQuantityShoppingCart(product: ShoppingCartUpdateRequest){}
+
+    fun OnSuccesEditQuantity(){}
+
+    fun OnErrorEditQuantity(message: String){}
 
     fun AddWishList(prod : WishListRequest){}
 

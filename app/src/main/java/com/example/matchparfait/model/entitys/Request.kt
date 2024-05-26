@@ -6,6 +6,11 @@ data class ShoppingCartRequest(
     val cantidad : Int = 0
 )
 
+data class ShoppingCartUpdateRequest(
+    val cartId: String = "",
+    val cantidad : Int = 0
+)
+
 data class WishListRequest(
     val productId: String = "",
     val color : String = ""

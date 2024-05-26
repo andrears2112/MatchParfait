@@ -4,11 +4,13 @@ import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
 import com.example.matchparfait.model.entitys.ShoppingCartRequest
+import com.example.matchparfait.model.entitys.ShoppingCartUpdateRequest
 
 interface ProductsView {
     fun OnProductsGetted(products : List<Product>){}
 
     fun OnErrorGettingProducts(message : String){}
+
     fun OnSuccesGettingCart(products : List<ProductShopBag>){}
 
     fun OnErrorGettingCart(message: String){}
@@ -16,6 +18,14 @@ interface ProductsView {
     fun OnSuccessAddingCart(){}
 
     fun OnErrorAddindgCart(message: String){}
+
+    fun OnDeleteOnCartSucces(){}
+
+    fun OnErrorDeleteCart(message: String){}
+
+    fun OnSuccesEditQuantity(){}
+
+    fun OnErrorEditQuantity(message: String){}
 
     fun OnSuccesAddingWishList(){}
 

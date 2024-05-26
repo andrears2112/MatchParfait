@@ -11,6 +11,7 @@ import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
 import com.example.matchparfait.model.entitys.ResponseService
 import com.example.matchparfait.model.entitys.ShoppingCartRequest
+import com.example.matchparfait.model.entitys.ShoppingCartUpdateRequest
 import com.example.matchparfait.model.entitys.WishListRequest
 import com.example.matchparfait.model.remote.ProductsServices
 import com.example.matchparfait.model.repositoy.interfaces.ProductsRepository
@@ -180,6 +181,56 @@ class ProductsRepositoryImpl(productsPresenter: ProductsPresenter, context: Cont
                     }
                     else {
                         prodPresenter.OnErrorGettingCart(body.body()!!.userMsg)
+                    }
+                }
+            }
+        )
+    }
+
+    override fun DeleteShoppingCart(product: ShoppingCartUpdateRequest) {
+        this.responseService.GetRequestForObject(
+            this.appServiceClient?.GetDefaultConnectionWithServices()?.
+            create(ProductsServices::class.java)!!.DeleteShoppingCart(Helpers.getToken(), product),
+            object : ResultInterface<Wrapper<ResponseService>> {
+                override fun failWithError(message: String) {
+                    prodPresenter.OnErrorDeleteCart(message)
+                }
+
+                override fun notFound(message: String) {
+                    prodPresenter.OnErrorDeleteCart(message)
+                }
+
+                override fun success(body: Response<Wrapper<ResponseService>>) {
+                    if(CheckObjectResult(body.body()!!)){
+                        prodPresenter.OnDeleteOnCartSucces()
+                    }
+                    else {
+                        prodPresenter.OnErrorDeleteCart(body.body()!!.userMsg)
+                    }
+                }
+            }
+        )
+    }
+
+    override fun EditQuantityShoppingCart(product: ShoppingCartUpdateRequest) {
+        this.responseService.GetRequestForObject(
+            this.appServiceClient?.GetDefaultConnectionWithServices()?.
+            create(ProductsServices::class.java)!!.EditQuantityShoppingCart(Helpers.getToken(), product),
+            object : ResultInterface<Wrapper<ResponseService>> {
+                override fun failWithError(message: String) {
+                    prodPresenter.OnErrorEditQuantity(message)
+                }
+
+                override fun notFound(message: String) {
+                    prodPresenter.OnErrorEditQuantity(message)
+                }
+
+                override fun success(body: Response<Wrapper<ResponseService>>) {
+                    if(CheckObjectResult(body.body()!!)){
+                        prodPresenter.OnSuccesEditQuantity()
+                    }
+                    else {
+                        prodPresenter.OnErrorEditQuantity(body.body()!!.userMsg)
                     }
                 }
             }

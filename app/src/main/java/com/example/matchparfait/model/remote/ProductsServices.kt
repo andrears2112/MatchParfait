@@ -6,6 +6,7 @@ import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
 import com.example.matchparfait.model.entitys.ResponseService
 import com.example.matchparfait.model.entitys.ShoppingCartRequest
+import com.example.matchparfait.model.entitys.ShoppingCartUpdateRequest
 import com.example.matchparfait.model.entitys.WishListRequest
 import retrofit2.Call
 import retrofit2.http.Body
@@ -32,6 +33,18 @@ interface ProductsServices {
         @Header("Authorization") str: String,
         @Body product: ShoppingCartRequest)
     : Call<Wrapper<ResponseService>>
+
+    @HTTP(method = "DELETE", path = "/api/shoppingCart", hasBody = true)
+    fun DeleteShoppingCart(
+        @Header("Authorization") str: String,
+        @Body product: ShoppingCartUpdateRequest)
+            : Call<Wrapper<ResponseService>>
+
+    @POST("/api/shoppingCart")
+    fun EditQuantityShoppingCart(
+        @Header("Authorization") str: String,
+        @Body product: ShoppingCartUpdateRequest)
+            : Call<Wrapper<ResponseService>>
 
     @POST("/api/wishList")
     fun AddWishList(
