@@ -8,7 +8,7 @@ data class Product(
     var productName : String = "",
     var productBrand : String = "",
     var price : Int = 0,
-    var quantity : Int = 0,
+    var cantidad : Int = 0,
     var stars : Int = 0,
     var photo: String = "",
     var description : String = "",
@@ -27,6 +27,18 @@ data class ProductWishList(
     var productName : String = "",
     var productBrand : String = "",
     var price : Int = 0,
+    var photo: String = "",
+    var color : String = "",
+    var classification: String = ""
+)
+
+data class ProductShopBag(
+    var cartId : String = "",
+    var productId : String = "",
+    var productName : String = "",
+    var productBrand : String = "",
+    var price : Int = 0,
+    var cantidad : Int = 0,
     var photo: String = "",
     var color : String = "",
     var classification: String = ""
