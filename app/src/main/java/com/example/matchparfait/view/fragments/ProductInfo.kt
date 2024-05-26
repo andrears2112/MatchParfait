@@ -97,7 +97,7 @@ class ProductInfo : Fragment(), View.OnClickListener, QuantityControllerDelegate
         this.name.text = product.productName
         this.brand.text = product.productBrand
         this.price.text = "$${product.price}.00"
-        this.quantityController.setMaxQuantity(product.quantity)
+        this.quantityController.setMaxQuantity(product.cantidad)
         this.definition.text = product.description
         this.ingredients.text = product.ingredients
 
