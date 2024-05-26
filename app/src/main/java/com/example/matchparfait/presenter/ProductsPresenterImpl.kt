@@ -70,8 +70,8 @@ class ProductsPresenterImpl(view : ProductsView, context: Context) : ProductsPre
         this.productsView.OnErrorGettingWishList(message)
     }
 
-    override fun DeleteWishList(id : String){
-        this.productsRepo.DeleteWishList(id)
+    override fun DeleteWishList(prod : ProductWishList){
+        this.productsRepo.DeleteWishList(prod)
     }
 
     override fun OnSuccessDeleteWishList(){
@@ -79,7 +79,7 @@ class ProductsPresenterImpl(view : ProductsView, context: Context) : ProductsPre
     }
 
     override fun OnErrorDeleteWishList(message: String){
-        this.OnErrorDeleteWishList(message)
+        this.productsView.OnErrorDeleteWishList(message)
     }
 
 }

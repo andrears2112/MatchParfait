@@ -13,5 +13,5 @@ interface ProductsRepository {
 
     fun GetWishList(){}
 
-    fun DeleteWishList(id : String){}
+    fun DeleteWishList(prod : ProductWishList){}
 }

@@ -31,7 +31,7 @@ interface ProductsPresenter {
 
     fun OnErrorGettingWishList(message: String){}
 
-    fun DeleteWishList(id : String){}
+    fun DeleteWishList(prod : ProductWishList){}
 
     fun OnSuccessDeleteWishList(){}
 

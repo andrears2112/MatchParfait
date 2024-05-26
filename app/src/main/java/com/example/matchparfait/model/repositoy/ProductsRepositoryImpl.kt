@@ -134,10 +134,10 @@ class ProductsRepositoryImpl(productsPresenter: ProductsPresenter, context: Cont
         )
     }
 
-    override fun DeleteWishList(id: String) {
+    override fun DeleteWishList(prod : ProductWishList) {
         this.responseService.GetRequestForObject(
             this.appServiceClient?.GetDefaultConnectionWithServices()?.
-            create(ProductsServices::class.java)!!.DeleteWishList(Helpers.getToken(), id),
+            create(ProductsServices::class.java)!!.DeleteWishList(Helpers.getToken(), prod),
             object : ResultInterface<Wrapper<ResponseService>> {
                 override fun failWithError(message: String) {
                     prodPresenter.OnErrorDeleteWishList(message)
