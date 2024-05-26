@@ -7,6 +7,7 @@ import com.example.matchparfait.model.dataSources.ResultInterface
 import com.example.matchparfait.model.dataSources.ServiceResponse
 import com.example.matchparfait.model.dataSources.Wrapper
 import com.example.matchparfait.model.entitys.Product
+import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
 import com.example.matchparfait.model.entitys.ResponseService
 import com.example.matchparfait.model.entitys.ShoppingCartRequest
@@ -25,6 +26,7 @@ class ProductsRepositoryImpl(productsPresenter: ProductsPresenter, context: Cont
     private var responseProducts : ServiceResponse<Wrapper<Product>, Product> = ServiceResponse<Wrapper<Product>, Product>()
     private var responseService : ServiceResponse<Wrapper<ResponseService>, ResponseService> = ServiceResponse<Wrapper<ResponseService>, ResponseService>()
     private var responseWishList : ServiceResponse<Wrapper<ProductWishList>, ProductWishList> = ServiceResponse<Wrapper<ProductWishList>, ProductWishList>()
+    private var responseShopBag : ServiceResponse<Wrapper<ProductShopBag>, ProductShopBag> = ServiceResponse<Wrapper<ProductShopBag>, ProductShopBag>()
 
     init {
         this.prodPresenter = productsPresenter
@@ -153,6 +155,31 @@ class ProductsRepositoryImpl(productsPresenter: ProductsPresenter, context: Cont
                     }
                     else {
                         prodPresenter.OnErrorDeleteWishList(body.body()!!.userMsg)
+                    }
+                }
+            }
+        )
+    }
+
+    override fun GetShoppingCart() {
+        this.responseShopBag.GetRequestForObject(
+            this.appServiceClient?.GetDefaultConnectionWithServices()?.
+            create(ProductsServices::class.java)!!.GetShoppingCart(Helpers.getToken()),
+            object : ResultInterface<Wrapper<ProductShopBag>> {
+                override fun failWithError(message: String) {
+                    prodPresenter.OnErrorGettingCart(message)
+                }
+
+                override fun notFound(message: String) {
+                    prodPresenter.OnErrorGettingCart(message)
+                }
+
+                override fun success(body: Response<Wrapper<ProductShopBag>>) {
+                    if(CheckObjectResult(body.body()!!)){
+                        prodPresenter.OnSuccesGettingCart(body.body()!!.data)
+                    }
+                    else {
+                        prodPresenter.OnErrorGettingCart(body.body()!!.userMsg)
                     }
                 }
             }

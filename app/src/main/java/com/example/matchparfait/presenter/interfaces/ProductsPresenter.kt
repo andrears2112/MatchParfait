@@ -1,6 +1,7 @@
 package com.example.matchparfait.presenter.interfaces
 
 import com.example.matchparfait.model.entitys.Product
+import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
 import com.example.matchparfait.model.entitys.ShoppingCartRequest
 import com.example.matchparfait.model.entitys.WishListRequest
@@ -12,6 +13,12 @@ interface ProductsPresenter {
     fun OnProductsGetted(products : List<Product>){}
 
     fun OnErrorGettingProducts(message : String){}
+
+    fun GetShoppingCart(){}
+
+    fun OnSuccesGettingCart(products : List<ProductShopBag>){}
+
+    fun OnErrorGettingCart(message: String){}
 
     fun AddShoppingCart(prodToShop : ShoppingCartRequest){}
 

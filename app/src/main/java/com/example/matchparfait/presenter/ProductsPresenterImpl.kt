@@ -2,6 +2,7 @@ package com.example.matchparfait.presenter
 
 import android.content.Context
 import com.example.matchparfait.model.entitys.Product
+import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
 import com.example.matchparfait.model.entitys.ShoppingCartRequest
 import com.example.matchparfait.model.entitys.WishListRequest
@@ -44,6 +45,18 @@ class ProductsPresenterImpl(view : ProductsView, context: Context) : ProductsPre
 
     override fun OnErrorAddindgCart(message: String){
         this.productsView.OnErrorAddindgCart(message)
+    }
+
+    override fun GetShoppingCart(){
+        this.productsRepo.GetShoppingCart()
+    }
+
+    override fun OnSuccesGettingCart(products : List<ProductShopBag>){
+        this.productsView.OnSuccesGettingCart(products)
+    }
+
+    override fun OnErrorGettingCart(message: String){
+        this.productsView.OnErrorGettingCart(message)
     }
 
     override fun AddWishList(prod : WishListRequest){

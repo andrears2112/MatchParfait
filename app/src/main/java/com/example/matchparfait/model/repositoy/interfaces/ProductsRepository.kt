@@ -1,11 +1,14 @@
 package com.example.matchparfait.model.repositoy.interfaces
 
+import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
 import com.example.matchparfait.model.entitys.ShoppingCartRequest
 import com.example.matchparfait.model.entitys.WishListRequest
 
 interface ProductsRepository {
     fun GetProducts(){}
+
+    fun GetShoppingCart(){}
 
     fun AddShoppingCart(prodToShop : ShoppingCartRequest){}
 
