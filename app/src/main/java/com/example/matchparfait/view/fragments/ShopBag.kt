@@ -14,6 +14,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,7 @@ import com.example.matchparfait.UserProfile
 import com.example.matchparfait.model.entitys.ProductColor
 import com.example.matchparfait.model.entitys.ProductItem
 import com.example.matchparfait.model.entitys.ProductShopBag
+import com.example.matchparfait.model.entitys.ShoppingCartUpdateRequest
 import com.example.matchparfait.presenter.ProductsPresenterImpl
 import com.example.matchparfait.presenter.interfaces.ProductsPresenter
 import com.example.matchparfait.utils.Helpers
@@ -42,6 +44,7 @@ class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityContro
     private lateinit var button : Button
     private lateinit var total : TextView
     private lateinit var prodPresenter : ProductsPresenter
+    private lateinit var listProducts : MutableList<ProductShopBag>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,6 +70,7 @@ class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityContro
     override fun OnSuccesGettingCart(products: List<ProductShopBag>) {
         this.loading.visibility = View.GONE
         if(products.isNotEmpty()){
+            this.listProducts = products.toMutableList()
             this.message.visibility = View.GONE
 
             val total: Int = products.sumOf { it.price }
@@ -89,7 +93,15 @@ class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityContro
     }
 
     override fun OnChangeAmount(product: ProductShopBag, newQuantity: Int) {
-
+        var prod = Helpers.getProducts().find { it.productId == product.productId }
+        adapter.updateProductPrice(product.productId, prod!!.price * newQuantity)
+        val index = listProducts.indexOfFirst { it.productId == product.productId }
+        this.listProducts[index].cantidad = newQuantity
+        val total: Int = listProducts.sumOf { it.price }
+        this.total.text = "Total: $${total}.00"
+        this.button.isEnabled = false
+        this.button.setBackgroundColor(ContextCompat.getColor(this.requireContext(), R.color.text_hint))
+        this.prodPresenter.EditQuantityShoppingCart(ShoppingCartUpdateRequest(product.cartId, product.productId, newQuantity, product.color))
     }
 
     override fun onProductClickShopBag(product: ProductShopBag) {
@@ -99,6 +111,36 @@ class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityContro
     }
 
     override fun onRemoveShopBag(product: ProductShopBag) {
+        val index = listProducts.indexOfFirst { it.productId == product.productId }
+        this.listProducts.removeAt(index)
+        val total: Int = listProducts.sumOf { it.price }
+        this.total.text = "Total: $${total}.00"
+        this.button.isEnabled = false
+        this.button.setBackgroundColor(ContextCompat.getColor(this.requireContext(), R.color.text_hint))
+        this.prodPresenter.DeleteShoppingCart(ShoppingCartUpdateRequest(product.cartId))
+    }
+
+    override fun OnDeleteOnCartSucces() {
         Toast.makeText(context, "CLICK ELIMINA", Toast.LENGTH_SHORT).show()
+        this.button.isEnabled = true
+        this.button.setBackgroundColor(ContextCompat.getColor(this.requireContext(), R.color.secondary))
+    }
+
+    override fun OnErrorDeleteCart(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        this.button.isEnabled = true
+        this.button.setBackgroundColor(ContextCompat.getColor(this.requireContext(), R.color.secondary))
+    }
+
+    override fun OnSuccesEditQuantity() {
+        Toast.makeText(context, "CLICK EDIT", Toast.LENGTH_SHORT).show()
+        this.button.isEnabled = true
+        this.button.setBackgroundColor(ContextCompat.getColor(this.requireContext(), R.color.secondary))
+    }
+
+    override fun OnErrorEditQuantity(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        this.button.isEnabled = true
+        this.button.setBackgroundColor(ContextCompat.getColor(this.requireContext(), R.color.secondary))
     }
 }
