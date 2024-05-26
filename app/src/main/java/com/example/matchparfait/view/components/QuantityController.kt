@@ -8,9 +8,10 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.matchparfait.R
+import com.example.matchparfait.model.entitys.ProductShopBag
 
-interface QuantityControllerDelegate{
-    fun OnChangeAmount(){}
+interface QuantityControllerDelegate {
+    fun OnChangeAmount(product : ProductShopBag, newQuantity: Int){}
 }
 
 class QuantityController @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) ,
@@ -22,6 +23,7 @@ View.OnClickListener{
     private var quantity : TextView
     private var maxQuantity : Int = 0
     private var actualQuantity : Int = 0
+    private var prod = ProductShopBag()
 
     init {
         val view : View = LayoutInflater.from(context).inflate(R.layout.controller_quantity, this, true)
@@ -42,6 +44,15 @@ View.OnClickListener{
         this.maxQuantity = amount
     }
 
+    fun setQuantity(amount: Int) {
+        this.actualQuantity = amount
+        this.quantity.text = this.actualQuantity.toString()
+    }
+
+    fun setProductShopBag(product : ProductShopBag){
+        prod = product
+    }
+
     fun getQuantity() : Int{
         return this.actualQuantity
     }
@@ -51,14 +62,14 @@ View.OnClickListener{
             if(this.actualQuantity != this.maxQuantity){
                 this.actualQuantity = this.actualQuantity + 1
                 this.quantity.text = this.actualQuantity.toString()
-                this.delegate.OnChangeAmount()
+                this.delegate.OnChangeAmount(prod, this.actualQuantity)
             }
         }
         if(p0!!.id == this.minus.id){
             if(this.actualQuantity != 1){
                 this.actualQuantity = this.actualQuantity - 1
                 this.quantity.text = this.actualQuantity.toString()
-                this.delegate.OnChangeAmount()
+                this.delegate.OnChangeAmount(prod, this.actualQuantity)
             }
         }
     }
