@@ -1,5 +1,6 @@
 package com.example.matchparfait.model.repositoy.interfaces
 
+import com.example.matchparfait.model.entitys.PayRequest
 import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
 import com.example.matchparfait.model.entitys.ShoppingCartRequest
@@ -22,4 +23,6 @@ interface ProductsRepository {
     fun GetWishList(){}
 
     fun DeleteWishList(prod : ProductWishList){}
+
+    fun CompleteSale(request : PayRequest){}
 }

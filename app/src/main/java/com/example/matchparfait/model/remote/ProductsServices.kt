@@ -2,6 +2,7 @@ package com.example.matchparfait.model.remote
 
 import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.dataSources.Wrapper
+import com.example.matchparfait.model.entitys.PayRequest
 import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
 import com.example.matchparfait.model.entitys.ResponseService
@@ -61,5 +62,11 @@ interface ProductsServices {
     fun DeleteWishList(
         @Header("Authorization") str: String,
         @Body prod : ProductWishList)
+            : Call<Wrapper<ResponseService>>
+
+    @POST("/api/sale/transaction")
+    fun CompleteSale(
+        @Header("Authorization") str: String,
+        @Body prod : PayRequest)
             : Call<Wrapper<ResponseService>>
 }

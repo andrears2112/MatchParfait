@@ -1,5 +1,6 @@
 package com.example.matchparfait.presenter.interfaces
 
+import com.example.matchparfait.model.entitys.PayRequest
 import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
@@ -56,4 +57,10 @@ interface ProductsPresenter {
     fun OnSuccessDeleteWishList(){}
 
     fun OnErrorDeleteWishList(message: String){}
+
+    fun CompleteSale(request : PayRequest){}
+
+    fun OnSuccessPayment(){}
+
+    fun OnErrorPayment(message: String){}
 }

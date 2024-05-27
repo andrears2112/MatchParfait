@@ -6,6 +6,7 @@ import com.example.matchparfait.model.dataSources.CheckObjectResult
 import com.example.matchparfait.model.dataSources.ResultInterface
 import com.example.matchparfait.model.dataSources.ServiceResponse
 import com.example.matchparfait.model.dataSources.Wrapper
+import com.example.matchparfait.model.entitys.PayRequest
 import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
@@ -231,6 +232,31 @@ class ProductsRepositoryImpl(productsPresenter: ProductsPresenter, context: Cont
                     }
                     else {
                         prodPresenter.OnErrorEditQuantity(body.body()!!.userMsg)
+                    }
+                }
+            }
+        )
+    }
+
+    override fun CompleteSale(request: PayRequest) {
+        this.responseService.GetRequestForObject(
+            this.appServiceClient?.GetDefaultConnectionWithServices()?.
+            create(ProductsServices::class.java)!!.CompleteSale(Helpers.getToken(), request),
+            object : ResultInterface<Wrapper<ResponseService>> {
+                override fun failWithError(message: String) {
+                    prodPresenter.OnErrorPayment(message)
+                }
+
+                override fun notFound(message: String) {
+                    prodPresenter.OnErrorPayment(message)
+                }
+
+                override fun success(body: Response<Wrapper<ResponseService>>) {
+                    if(CheckObjectResult(body.body()!!)){
+                        prodPresenter.OnSuccessPayment()
+                    }
+                    else {
+                        prodPresenter.OnErrorPayment(body.body()!!.userMsg)
                     }
                 }
             }
