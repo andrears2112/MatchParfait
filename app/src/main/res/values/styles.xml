@@ -6,11 +6,15 @@
         <!-- Otros atributos del tema -->
     </style>
 
-    <!-- styles.xml (o en res/values-v21/styles.xml) -->
     <style name="CustomRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/custom_rating_bar</item>
         <item name="android:minHeight">48dp</item> <!-- Cambia esto según tu preferencia -->
         <item name="android:maxHeight">48dp</item> <!-- Cambia esto según tu preferencia -->
+    </style>
+
+    <style name="CustomSpinnerStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:popupBackground">@drawable/bg_edit_text</item>
     </style>
 
 </resources>
