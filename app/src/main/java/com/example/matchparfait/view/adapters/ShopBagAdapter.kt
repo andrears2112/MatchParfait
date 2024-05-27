@@ -1,22 +1,15 @@
 package com.example.matchparfait.view.adapters
 
-import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.bumptech.glide.Glide
-import com.example.matchparfait.MyApp
 import com.example.matchparfait.R
-import com.example.matchparfait.view.fragments.ShopBag
-import com.example.matchparfait.model.entitys.ProductColor
-import com.example.matchparfait.model.entitys.ProductItem
 import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.utils.Helpers
 import com.example.matchparfait.view.components.QuantityController

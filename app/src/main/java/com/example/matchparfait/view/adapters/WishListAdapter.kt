@@ -1,28 +1,17 @@
 package com.example.matchparfait.view.adapters
 
-import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Filter
-import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.bumptech.glide.Glide
-import com.example.matchparfait.MyApp
 import com.example.matchparfait.R
-import com.example.matchparfait.model.entitys.ProductItem
-import com.example.matchparfait.databinding.WishListCardBinding
-import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.ProductWishList
-import com.google.gson.Gson
 
 class WishListAdapter(private val productList: MutableList<ProductWishList>, private val listener: OnProductClickListener) : RecyclerView.Adapter<WishListAdapter.ProductViewHolder>(){
 
