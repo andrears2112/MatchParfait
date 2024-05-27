@@ -38,6 +38,17 @@ data class User(
     var classification : Int = 0
 )
 
+data class AddressUser(
+    var country : String = "",
+    var state : String = "",
+    var municipality : String = "",
+    var postal_code: String = "",
+    var suburb : String = "",
+    var street : String = "",
+    var ext_num : String = "",
+    var int_num : String = ""
+)
+
 class UserFactory {
     companion object {
         fun userForLogin(mail : String, password : String) : User {
