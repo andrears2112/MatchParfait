@@ -76,7 +76,7 @@ class WishList : Fragment(), ProductsView, OnProductClickListener {
         else{
             loading.visibility = View.GONE
             message.visibility = View.VISIBLE
-            message.text = "Tu Wish List está vacia"
+            message.text = "Tu Wish List está vacía"
         }
     }
 
@@ -127,7 +127,7 @@ class WishList : Fragment(), ProductsView, OnProductClickListener {
         this.prodToDelete = ProductWishList()
         if(adapter.itemCount == 0){
             message.visibility = View.VISIBLE
-            message.text = "Tu Wish List está vacia"
+            message.text = "Tu Wish List está vacía"
         }
     }
 
