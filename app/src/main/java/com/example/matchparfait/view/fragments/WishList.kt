@@ -125,6 +125,10 @@ class WishList : Fragment(), ProductsView, OnProductClickListener {
         this.loadingServices.dismiss()
         adapter.removeProductFromWishList(this.prodToDelete)
         this.prodToDelete = ProductWishList()
+        if(adapter.itemCount == 0){
+            message.visibility = View.VISIBLE
+            message.text = "Tu Wish List está vacia"
+        }
     }
 
     override fun OnErrorDeleteWishList(message: String) {
