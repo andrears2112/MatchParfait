@@ -105,7 +105,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="40dp"
                 android:text="Proceder al pago"
-                android:textSize="16dp"
+                android:textSize="17dp"
                 android:padding="10dp"
                 android:fontFamily="@font/dm_sans_regular"
                 android:textColor="#FFFCF7"

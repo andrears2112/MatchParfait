@@ -29,7 +29,8 @@ import com.example.matchparfait.view.components.Loading
 import com.example.matchparfait.view.components.QuantityControllerDelegate
 import com.example.matchparfait.view.interfaces.ProductsView
 
-class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityControllerDelegate {
+class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityControllerDelegate,
+View.OnClickListener{
 
     private lateinit var loading : ProgressBar
     private lateinit var recyclerView: RecyclerView
@@ -62,6 +63,8 @@ class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityContro
         recyclerView = view.findViewById(R.id.recycler_search)
         loading = view.findViewById(R.id.progressBar)
 
+        this.button.setOnClickListener(this)
+
         this.prodPresenter.GetShoppingCart()
     }
 
@@ -73,6 +76,8 @@ class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityContro
 
             val total: Int = products.sumOf { it.price }
             this.total.text = "Total: $${total}.00"
+            this.button.isEnabled = true
+            this.button.backgroundTintList = ColorStateList.valueOf((Color.parseColor("#9B0E28")))
         }
         else{
             this.recyclerView.visibility = View.GONE
@@ -148,5 +153,12 @@ class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityContro
         this.alertDialog.setImage(R.drawable.ic_star_worry)
         this.alertDialog.setMessage(message)
         this.alertDialog.show()
+    }
+
+    override fun onClick(p0: View?) {
+        if (p0!!.id == this.button.id){
+            Helpers.saveTotal(this.total.text.toString())
+            findNavController().navigate(R.id.payment)
+        }
     }
 }
