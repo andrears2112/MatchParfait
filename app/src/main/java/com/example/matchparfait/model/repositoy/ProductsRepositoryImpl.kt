@@ -126,7 +126,7 @@ class ProductsRepositoryImpl(productsPresenter: ProductsPresenter, context: Cont
                 }
 
                 override fun success(body: Response<Wrapper<ProductWishList>>) {
-                    if(CheckObjectResult(body.body()!!)){
+                    if(body.body()!!.userMsg.isEmpty()){
                         prodPresenter.OnWishListGetted(body.body()!!.data)
                     }
                     else {
@@ -176,7 +176,7 @@ class ProductsRepositoryImpl(productsPresenter: ProductsPresenter, context: Cont
                 }
 
                 override fun success(body: Response<Wrapper<ProductShopBag>>) {
-                    if(CheckObjectResult(body.body()!!)){
+                    if(body.body()!!.userMsg.isEmpty()){
                         prodPresenter.OnSuccesGettingCart(body.body()!!.data)
                     }
                     else {
