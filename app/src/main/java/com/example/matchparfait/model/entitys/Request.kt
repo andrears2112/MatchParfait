@@ -17,3 +17,8 @@ data class WishListRequest(
     val productId: String = "",
     val color : String = ""
 )
+
+data class PayRequest(
+    val totalAmount : String = "",
+    val cardId : String = ""
+)
