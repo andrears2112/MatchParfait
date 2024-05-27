@@ -1,6 +1,7 @@
 package com.example.matchparfait.utils
 
 import com.example.matchparfait.model.entitys.AddressUser
+import com.example.matchparfait.model.entitys.Card
 import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.User
 
@@ -13,6 +14,7 @@ class Helpers {
         private lateinit var selectProduct: Product
         private lateinit var total : String
         private lateinit var editAddress : AddressUser
+        private lateinit var card : Card
 
         fun startSession(token : String, user : User){
             this.actualUser = user
@@ -57,6 +59,14 @@ class Helpers {
 
         fun getAddressToEdit() : AddressUser{
             return this.editAddress
+        }
+
+        fun saveCard(card : Card){
+            this.card = card
+        }
+
+        fun getCard() : Card{
+            return this.card
         }
     }
 }
