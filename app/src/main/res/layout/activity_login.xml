@@ -80,7 +80,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:layout_marginStart="10dp"
         android:text="¿No tienes una cuenta? Regístrate"
         android:textColor="@color/secondary"
         android:textAlignment="center"
