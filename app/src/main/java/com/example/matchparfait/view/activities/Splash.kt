@@ -24,7 +24,6 @@ class Splash : AppCompatActivity(), LoginView, ProductsView{
     private var presenter : LoginPresenter = LoginPresenterImpl(this, this)
     private var preserP : ProductsPresenter = ProductsPresenterImpl(this, this)
     private var preferences = Preferences<String>(this)
-    private lateinit var loading : Loading
     private lateinit var alertDialog : AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +31,6 @@ class Splash : AppCompatActivity(), LoginView, ProductsView{
         setContentView(R.layout.activity_splash)
 
         this.alertDialog = AlertDialog(this)
-        this.loading = Loading(this)
 
         if(preferences.GetPreferenceSync("mail") == "NOT_FOUND"){
             var intent = Intent(this, Login::class.java)
@@ -40,7 +38,6 @@ class Splash : AppCompatActivity(), LoginView, ProductsView{
         } else {
             var mail = preferences.GetPreferenceSync("mail")
             var passwod = preferences.GetPreferenceSync("password")
-            this.loading.show()
             this.presenter.Login(mail, passwod)
         }
     }
@@ -50,14 +47,12 @@ class Splash : AppCompatActivity(), LoginView, ProductsView{
     }
 
     override fun OnProductsGetted(products: List<Product>) {
-        this.loading.dismiss()
         Helpers.saveProducts(products)
         var intent = Intent(this, Main::class.java)
         startActivity(intent)
     }
 
     override fun OnErrorGettingProducts(message: String) {
-        this.loading.show()
         this.alertDialog.setMessage(message)
         this.alertDialog.setImage(R.drawable.ic_star_worry)
         this.alertDialog.show()
@@ -65,7 +60,6 @@ class Splash : AppCompatActivity(), LoginView, ProductsView{
     }
 
     override fun OnLoginError(message: String) {
-        this.loading.dismiss()
         this.alertDialog.setMessage(message)
         this.alertDialog.setImage(R.drawable.ic_star_worry)
         this.alertDialog.show()
