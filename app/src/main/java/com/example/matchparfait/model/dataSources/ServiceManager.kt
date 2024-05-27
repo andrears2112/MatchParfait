@@ -29,6 +29,7 @@ public class Wrapper<T>(
 )
 
 public interface ResultInterface<Wrapper> {
+    fun notFoundUser(body:retrofit2.Response<Wrapper>){}
     fun success(body:retrofit2.Response<Wrapper>){}
     fun successWithList(body:retrofit2.Response<Wrapper>){}
     fun notFound(message:String){}
@@ -82,6 +83,9 @@ public class ServiceResponse<Wrapper, T>(){
                 }
                 if (response.code() == 200) {
                     res.success(response)
+                }
+                if (response.code() == 409) {
+                    res.notFoundUser(response)
                 }
             }
         })

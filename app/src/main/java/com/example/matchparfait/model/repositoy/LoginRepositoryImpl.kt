@@ -43,13 +43,16 @@ class LoginRepositoryImpl(logPresenter : LoginPresenter, context: Context?) : Lo
 
                 override fun success(body: Response<Wrapper<User>>) {
                     if(CheckObjectResult(body.body()!!)){
-                        //SessionManager.startSessionA(body.body()!!.data.first())
                         Helpers.startSession(body.body()!!.tokenSession, body.body()!!.data.first())
                         logPresenter.OnLoginSuccess(body.body()!!.data.first())
                     }
                     else {
                         logPresenter.OnLoginError(body.body()!!.userMsg)
                     }
+                }
+
+                override fun notFoundUser(body: Response<Wrapper<User>>) {
+                    logPresenter.OnLoginError("Usuario o contraseña incorrecta")
                 }
             })
     }
