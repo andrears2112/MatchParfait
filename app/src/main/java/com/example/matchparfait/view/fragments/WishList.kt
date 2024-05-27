@@ -21,6 +21,8 @@ import com.example.matchparfait.presenter.interfaces.ProductsPresenter
 import com.example.matchparfait.utils.Helpers
 import com.example.matchparfait.view.adapters.OnProductClickListener
 import com.example.matchparfait.view.adapters.WishListAdapter
+import com.example.matchparfait.view.components.AlertDialog
+import com.example.matchparfait.view.components.Loading
 import com.example.matchparfait.view.interfaces.ProductsView
 
 class WishList : Fragment(), ProductsView, OnProductClickListener {
@@ -33,6 +35,8 @@ class WishList : Fragment(), ProductsView, OnProductClickListener {
     private lateinit var adapter: WishListAdapter
     private lateinit var prodPresenter: ProductsPresenter
     private lateinit var prodToDelete : ProductWishList
+    private lateinit var loadingServices : Loading
+    private lateinit var alertDialog : AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +50,8 @@ class WishList : Fragment(), ProductsView, OnProductClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         this.prodPresenter = ProductsPresenterImpl(this, this.requireContext())
+        this.alertDialog = AlertDialog(this.requireContext())
+        this.loadingServices = Loading(this.requireContext())
         recyclerView = view.findViewById(R.id.recycler_search)
         loading = view.findViewById(R.id.progressBar)
         message = view.findViewById(R.id.message)
@@ -60,8 +66,6 @@ class WishList : Fragment(), ProductsView, OnProductClickListener {
     }
 
     override fun OnWishListGetted(products: List<ProductWishList>) {
-        Log.d("WISH LIST", "todo ok ;P")
-
         if(products.isNotEmpty()){
             loading.visibility = View.GONE
             message.visibility = View.GONE
@@ -77,8 +81,12 @@ class WishList : Fragment(), ProductsView, OnProductClickListener {
     }
 
     override fun OnErrorGettingWishList(message: String) {
-        Toast.makeText(this.requireContext(), message, Toast.LENGTH_SHORT).show()
-        Log.d("ERROR wish", message)
+        loading.visibility = View.GONE
+        this.message.visibility = View.GONE
+        this.alertDialog.setImage(R.drawable.ic_star_worry)
+        this.alertDialog.setMessage(message)
+        this.alertDialog.show()
+        Log.d("ERROR WISHLIST", message)
     }
 
     override fun onProductClickWish(product: ProductWishList) {
@@ -90,31 +98,41 @@ class WishList : Fragment(), ProductsView, OnProductClickListener {
     override fun onClickShop(product: ProductWishList) {
         this.prodToDelete = product
         var prod = ShoppingCartRequest(product.productId, product.color, 1)
+        this.loadingServices.show()
         this.prodPresenter.AddShoppingCart(prod)
     }
 
     override fun onRemoveWishList(product: ProductWishList) {
         this.prodToDelete = product
+        this.loadingServices.show()
         this.prodPresenter.DeleteWishList(this.prodToDelete)
     }
 
     override fun OnSuccessAddingCart() {
-        Log.d("OK SHOP", ":))")
         this.prodPresenter.DeleteWishList(this.prodToDelete)
     }
 
     override fun OnErrorAddindgCart(message: String) {
+        this.loadingServices.dismiss()
+        this.message.visibility = View.GONE
+        this.alertDialog.setImage(R.drawable.ic_star_worry)
+        this.alertDialog.setMessage(message)
+        this.alertDialog.show()
         Log.d("ERROR SHOP", message)
-        Toast.makeText(this.requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     override fun OnSuccessDeleteWishList() {
+        this.loadingServices.dismiss()
         adapter.removeProductFromWishList(this.prodToDelete)
         this.prodToDelete = ProductWishList()
-        Toast.makeText(this.requireContext(), "Listo", Toast.LENGTH_SHORT).show()
     }
 
     override fun OnErrorDeleteWishList(message: String) {
-        Toast.makeText(this.requireContext(), message, Toast.LENGTH_SHORT).show()
+        this.loadingServices.dismiss()
+        this.message.visibility = View.GONE
+        this.alertDialog.setImage(R.drawable.ic_star_worry)
+        this.alertDialog.setMessage(message)
+        this.alertDialog.show()
+        Log.d("ERROR DELETE WISHLIST", message)
     }
 }
