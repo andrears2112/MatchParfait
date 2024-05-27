@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@drawable/bg_alert_dialog"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/dialogImage"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_star_happy"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/dialogMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Mensaje de ejemplo"
+        android:fontFamily="@font/dm_sans_regular"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textColor="@color/text_dark" />
+
+    <Button
+        android:id="@+id/closeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Aceptar"
+        android:fontFamily="@font/dm_sans_regular"
+        android:textColor="@color/background"
+        android:textSize="16dp"
+        android:backgroundTint="@color/secondary"
+        android:onClick="closeDialog" />
+</LinearLayout>
