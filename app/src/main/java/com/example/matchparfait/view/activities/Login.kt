@@ -91,6 +91,7 @@ class Login : AppCompatActivity(), View.OnClickListener, LoginView, ProductsView
     }
 
     override fun OnErrorGettingProducts(message: String) {
+        this.loading.dismiss()
         this.alertDialog.setMessage(message)
         this.alertDialog.setImage(R.drawable.ic_star_worry)
         this.alertDialog.show()
