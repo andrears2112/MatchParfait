@@ -23,13 +23,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.fragments.Principal"/>
-        <activity android:name=".OtherSites"/>
-        <activity android:name=".view.fragments.WishList"/>
         <activity android:name=".BasicRecycler"/>
-        <activity android:name=".view.fragments.ShopBag"/>
         <activity android:name=".DisableMessage"/>
         <activity android:name=".view.activities.Main"/>
+        <activity android:name=".view.activities.Login"/>
     </application>
 
 </manifest>
