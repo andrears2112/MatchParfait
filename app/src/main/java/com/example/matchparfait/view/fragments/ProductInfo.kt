@@ -29,6 +29,8 @@ import com.example.matchparfait.presenter.interfaces.ProductsPresenter
 import com.example.matchparfait.utils.Helpers
 import com.example.matchparfait.view.adapters.ColorAdapter
 import com.example.matchparfait.view.adapters.ImagesAdapter
+import com.example.matchparfait.view.components.AlertDialog
+import com.example.matchparfait.view.components.Loading
 import com.example.matchparfait.view.components.QuantityController
 import com.example.matchparfait.view.components.QuantityControllerDelegate
 import com.example.matchparfait.view.components.ScoreStars
@@ -55,6 +57,8 @@ class ProductInfo : Fragment(), View.OnClickListener, QuantityControllerDelegate
     private lateinit var btn_wishList : MaterialButton
     private lateinit var prodPresenter : ProductsPresenter
     private var selectedProduct : String = ""
+    private lateinit var loadingServices : Loading
+    private lateinit var alertDialog : AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,6 +71,8 @@ class ProductInfo : Fragment(), View.OnClickListener, QuantityControllerDelegate
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this.prodPresenter = ProductsPresenterImpl(this, this.requireContext())
+        this.alertDialog = AlertDialog(this.requireContext())
+        this.loadingServices = Loading(this.requireContext())
         this.stars = view.findViewById(R.id.stars)
         this.name = view.findViewById(R.id.name_product)
         this.price = view.findViewById(R.id.price)
@@ -132,20 +138,26 @@ class ProductInfo : Fragment(), View.OnClickListener, QuantityControllerDelegate
     override fun onClick(p0: View?) {
         if(p0!!.id == this.btn_shop.id){
             if(this.selectedProduct != ""){
-                var prod : ShoppingCartRequest = ShoppingCartRequest(Helpers.getSelectedProduct().productId, this.selectedProduct, this.quantityController.getQuantity())
+                var prod = ShoppingCartRequest(Helpers.getSelectedProduct().productId, this.selectedProduct, this.quantityController.getQuantity())
+                this.loadingServices.show()
                 this.prodPresenter.AddShoppingCart(prod)
             }
             else {
-
+                this.alertDialog.setImage(R.drawable.ic_star_worry)
+                this.alertDialog.setMessage("Es necesario elegir un color")
+                this.alertDialog.show()
             }
         }
         if(p0.id == this.btn_wishList.id){
             if(this.selectedProduct != "") {
                 var prod = WishListRequest(Helpers.getSelectedProduct().productId, this.selectedProduct)
+                this.loadingServices.show()
                 this.prodPresenter.AddWishList(prod)
             }
             else {
-
+                this.alertDialog.setImage(R.drawable.ic_star_worry)
+                this.alertDialog.setMessage("Es necesario elegir un color")
+                this.alertDialog.show()
             }
         }
         if(p0.id == this.prevButton.id){
@@ -163,41 +175,33 @@ class ProductInfo : Fragment(), View.OnClickListener, QuantityControllerDelegate
     }
 
     override fun OnSuccessAddingCart() {
-        Log.d("OK SHOP", ":))")
-        Toast.makeText(this.requireContext(), "Al carrito", Toast.LENGTH_SHORT).show()
+        this.loadingServices.dismiss()
+        this.alertDialog.setImage(R.drawable.ic_star_smile)
+        this.alertDialog.setMessage("¡Listo! Ya esta en tu bolsa de compras")
+        this.alertDialog.show()
     }
 
     override fun OnErrorAddindgCart(message: String) {
         Log.d("ERROR SHOP", message)
-        Toast.makeText(this.requireContext(), message, Toast.LENGTH_SHORT).show()
+        this.loadingServices.dismiss()
+        this.alertDialog.setImage(R.drawable.ic_star_worry)
+        this.alertDialog.setMessage(message)
+        this.alertDialog.show()
     }
 
     override fun OnSuccesAddingWishList() {
-        Log.d("OK WISH", ":))")
-        Toast.makeText(this.requireContext(), "A wish", Toast.LENGTH_SHORT).show()
+        this.loadingServices.dismiss()
+        this.alertDialog.setImage(R.drawable.ic_star_smile)
+        this.alertDialog.setMessage("¡Listo! Ya esta en tu wish list")
+        this.alertDialog.show()
     }
 
     override fun OnErrorAddingWishList(message: String) {
-        Log.d("ERROR Wish", message)
-        Toast.makeText(this.requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
-
-    fun dialog(context: Context, message: String) {
-        val dialog = Dialog(context)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.popup_message)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        val text : TextView = dialog.findViewById(R.id.message)
-        text.text = message
-
-        val handler = Handler()
-        handler.postDelayed({
-            dialog.dismiss()
-        }, 1000)
-
-        dialog.show()
+        Log.d("ERROR WISHLIST", message)
+        this.loadingServices.dismiss()
+        this.alertDialog.setImage(R.drawable.ic_star_smile)
+        this.alertDialog.setMessage(message)
+        this.alertDialog.show()
     }
 
     private fun createDots(position: Int, images : List<String>) {
