@@ -8,10 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.matchparfait.R
-import com.example.matchparfait.UserProfile
 
 class Main : AppCompatActivity(), View.OnClickListener {
 
+    private lateinit var principal : ImageView
     private lateinit var search : ImageView
     private lateinit var shop_bag : ImageView
     private lateinit var user : ImageView
@@ -24,11 +24,13 @@ class Main : AppCompatActivity(), View.OnClickListener {
 
         this.navController = findNavController(R.id.nav_host_fragment)
 
+        this.principal = findViewById(R.id.principal)
         this.search = findViewById(R.id.search)
         this.shop_bag = findViewById(R.id.shop_bag)
         this.user = findViewById(R.id.user)
         this.wishList = findViewById(R.id.wish_list)
 
+        this.principal.setOnClickListener(this)
         this.search.setOnClickListener(this)
         this.shop_bag.setOnClickListener(this)
         this.user.setOnClickListener(this)
@@ -36,6 +38,9 @@ class Main : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
+        if (p0!!.id == this.principal.id) {
+            navController.navigate(R.id.principal)
+        }
         if (p0!!.id == this.search.id) {
             navController.navigate(R.id.searchProduct)
         }
@@ -46,7 +51,7 @@ class Main : AppCompatActivity(), View.OnClickListener {
             navController.navigate(R.id.wishList)
         }
         if (p0!!.id == this.user.id) {
-            startActivity(Intent(this, UserProfile::class.java))
+            startActivity(Intent(this, Profile::class.java))
         }
     }
 }
