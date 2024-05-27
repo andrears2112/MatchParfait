@@ -1,6 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/top"
+            android:background="@drawable/bg_app"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:text="Confirma tu información"
+                android:textAlignment="center"
+                android:textColor="@color/secondary"
+                android:fontFamily="@font/playfair_display_regular"
+                android:textSize="24dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="200dp"
+                android:layout_marginBottom="200dp"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:indeterminateTint="#EF0C37" />
+
+            <TextView
+                android:id="@+id/titleAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:text="Dirección de envio"
+                android:textColor="@color/subheadings"
+                android:fontFamily="@font/dm_sans_regular"
+                android:textSize="20dp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:text="Direccion"
+                android:textColor="@color/text_dark"
+                android:fontFamily="@font/dm_sans_regular"
+                android:textSize="18dp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/edit_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:text="Editar"
+                android:textColor="@color/secondary"
+                android:fontFamily="@font/dm_sans_regular"
+                android:textSize="20dp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/titleCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:text="Método de pago"
+                android:textColor="@color/subheadings"
+                android:fontFamily="@font/dm_sans_regular"
+                android:textSize="20dp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/cardHeadline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:text="Tarjeta"
+                android:textColor="@color/text_dark"
+                android:fontFamily="@font/dm_sans_regular"
+                android:textSize="18dp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:text="Tarjeta"
+                android:textColor="@color/text_dark"
+                android:fontFamily="@font/dm_sans_regular"
+                android:textSize="18dp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/edit_payType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:text="Editar"
+                android:textColor="@color/secondary"
+                android:fontFamily="@font/dm_sans_regular"
+                android:textSize="20dp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:text="Total: $0"
+                android:textColor="@color/text_dark"
+                android:fontFamily="@font/dm_sans_regular"
+                android:textSize="20dp"
+                android:visibility="gone"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:background="#E7E4DE" />
+
+            <Button
+                android:id="@+id/pay_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="40dp"
+                android:enabled="false"
+                android:text="Terminar compra"
+                android:fontFamily="@font/dm_sans_regular"
+                android:textSize="17dp"
+                android:padding="10dp"
+                android:textColor="#FFFCF7"
+                app:backgroundTint="#A2A2A2"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
