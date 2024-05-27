@@ -1,6 +1,5 @@
 package com.example.matchparfait.view.fragments
 
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
@@ -9,22 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.matchparfait.DisableMessage
-import com.example.matchparfait.MyApp
 import com.example.matchparfait.R
-import com.example.matchparfait.UserProfile
-import com.example.matchparfait.model.entitys.ProductColor
-import com.example.matchparfait.model.entitys.ProductItem
 import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ShoppingCartUpdateRequest
 import com.example.matchparfait.presenter.ProductsPresenterImpl
@@ -32,6 +24,8 @@ import com.example.matchparfait.presenter.interfaces.ProductsPresenter
 import com.example.matchparfait.utils.Helpers
 import com.example.matchparfait.view.adapters.OnProductClickListener
 import com.example.matchparfait.view.adapters.ShopBagAdapter
+import com.example.matchparfait.view.components.AlertDialog
+import com.example.matchparfait.view.components.Loading
 import com.example.matchparfait.view.components.QuantityControllerDelegate
 import com.example.matchparfait.view.interfaces.ProductsView
 
@@ -45,6 +39,8 @@ class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityContro
     private lateinit var total : TextView
     private lateinit var prodPresenter : ProductsPresenter
     private lateinit var listProducts : MutableList<ProductShopBag>
+    private lateinit var loadingServices : Loading
+    private lateinit var alertDialog : AlertDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,6 +54,8 @@ class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityContro
         super.onViewCreated(view, savedInstanceState)
 
         this.prodPresenter = ProductsPresenterImpl(this, this.requireContext())
+        this.alertDialog = AlertDialog(this.requireContext())
+        this.loadingServices = Loading(this.requireContext())
         message = view.findViewById(R.id.message)
         button = view.findViewById(R.id.shop_btn)
         total = view.findViewById(R.id.amount)
@@ -77,6 +75,7 @@ class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityContro
             this.total.text = "Total: $${total}.00"
         }
         else{
+            this.recyclerView.visibility = View.GONE
             this.message.visibility = View.VISIBLE
             this.button.isEnabled = false
             this.button.backgroundTintList = ColorStateList.valueOf((Color.parseColor("#A2A2A2")))
@@ -88,7 +87,11 @@ class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityContro
     }
 
     override fun OnErrorGettingCart(message: String) {
-        Toast.makeText(this.requireContext(), message, Toast.LENGTH_SHORT).show()
+        loading.visibility = View.GONE
+        this.message.visibility = View.GONE
+        this.alertDialog.setImage(R.drawable.ic_star_worry)
+        this.alertDialog.setMessage(message)
+        this.alertDialog.show()
         Log.d("ERROR CART", message)
     }
 
@@ -99,8 +102,7 @@ class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityContro
         this.listProducts[index].cantidad = newQuantity
         val total: Int = listProducts.sumOf { it.price }
         this.total.text = "Total: $${total}.00"
-        this.button.isEnabled = false
-        this.button.setBackgroundColor(ContextCompat.getColor(this.requireContext(), R.color.text_hint))
+        this.loadingServices.show()
         this.prodPresenter.EditQuantityShoppingCart(ShoppingCartUpdateRequest(product.cartId, product.productId, newQuantity, product.color))
     }
 
@@ -115,32 +117,36 @@ class ShopBag : Fragment(), ProductsView, OnProductClickListener, QuantityContro
         this.listProducts.removeAt(index)
         val total: Int = listProducts.sumOf { it.price }
         this.total.text = "Total: $${total}.00"
-        this.button.isEnabled = false
-        this.button.setBackgroundColor(ContextCompat.getColor(this.requireContext(), R.color.text_hint))
+        this.loadingServices.show()
         this.prodPresenter.DeleteShoppingCart(ShoppingCartUpdateRequest(product.cartId))
     }
 
     override fun OnDeleteOnCartSucces() {
-        Toast.makeText(context, "CLICK ELIMINA", Toast.LENGTH_SHORT).show()
-        this.button.isEnabled = true
-        this.button.setBackgroundColor(ContextCompat.getColor(this.requireContext(), R.color.secondary))
+        if(adapter.itemCount == 0){
+            message.visibility = View.VISIBLE
+            this.recyclerView.visibility = View.GONE
+            message.text = "Tu bolsa de compras está vacía"
+            this.button.isEnabled = false
+            this.button.backgroundTintList = ColorStateList.valueOf((Color.parseColor("#A2A2A2")))
+        }
+        this.loadingServices.dismiss()
     }
 
     override fun OnErrorDeleteCart(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-        this.button.isEnabled = true
-        this.button.setBackgroundColor(ContextCompat.getColor(this.requireContext(), R.color.secondary))
+        this.loadingServices.dismiss()
+        this.alertDialog.setImage(R.drawable.ic_star_worry)
+        this.alertDialog.setMessage(message)
+        this.alertDialog.show()
     }
 
     override fun OnSuccesEditQuantity() {
-        Toast.makeText(context, "CLICK EDIT", Toast.LENGTH_SHORT).show()
-        this.button.isEnabled = true
-        this.button.setBackgroundColor(ContextCompat.getColor(this.requireContext(), R.color.secondary))
+        this.loadingServices.dismiss()
     }
 
     override fun OnErrorEditQuantity(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-        this.button.isEnabled = true
-        this.button.setBackgroundColor(ContextCompat.getColor(this.requireContext(), R.color.secondary))
+        this.loadingServices.dismiss()
+        this.alertDialog.setImage(R.drawable.ic_star_worry)
+        this.alertDialog.setMessage(message)
+        this.alertDialog.show()
     }
 }
