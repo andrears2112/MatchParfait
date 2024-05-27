@@ -1,5 +1,6 @@
 package com.example.matchparfait.view.interfaces
 
+import com.example.matchparfait.model.entitys.PayRequest
 import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
@@ -38,4 +39,8 @@ interface ProductsView {
     fun OnSuccessDeleteWishList(){}
 
     fun OnErrorDeleteWishList(message: String){}
+
+    fun OnSuccessPayment(){}
+
+    fun OnErrorPayment(message: String){}
 }
