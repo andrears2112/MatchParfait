@@ -65,7 +65,7 @@ class Login : AppCompatActivity(), View.OnClickListener, LoginView, ProductsView
             }
         }
         if(p0.id == this.btn_register.id){
-
+            startActivity(Intent(this, Register::class.java))
         }
     }
 
