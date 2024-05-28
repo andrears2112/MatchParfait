@@ -15,4 +15,10 @@ interface CardPresenter {
     fun OnSuccessEditCard(){}
 
     fun OnErrorEditCard(message: String){}
+
+    fun AddCard(card : Card){}
+
+    fun OnSuccessAddingCard(){}
+
+    fun OnErrorAddingCard(message: String){}
 }

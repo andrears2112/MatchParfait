@@ -85,4 +85,29 @@ class CardRepositoryImpl(cardPresenter: CardPresenter, context: Context) : CardR
         )
     }
 
+    override fun AddCard(card: Card) {
+        this.responseService.GetRequestForObject(
+            this.appServiceClient?.GetDefaultConnectionWithServices()?.
+            create(CardServices::class.java)!!.AddCard(Helpers.getToken(), card),
+            object : ResultInterface<Wrapper<ResponseService>> {
+                override fun failWithError(message: String) {
+                    cardPresenter.OnErrorAddingCard(message)
+                }
+
+                override fun notFound(message: String) {
+                    cardPresenter.OnErrorAddingCard(message)
+                }
+
+                override fun success(body: Response<Wrapper<ResponseService>>) {
+                    if(CheckObjectResult(body.body()!!)){
+                        cardPresenter.OnSuccessAddingCard()
+                    }
+                    else {
+                        cardPresenter.OnErrorAddingCard(body.body()!!.userMsg)
+                    }
+                }
+            }
+        )
+    }
+
 }

@@ -42,4 +42,16 @@ class CardPresenterImpl(view : CardView, context: Context) : CardPresenter {
     override fun OnErrorEditCard(message: String){
         this.cardView.OnErrorEditCard(message)
     }
+
+    override fun AddCard(card : Card){
+        this.cardRepo.AddCard(card)
+    }
+
+    override fun OnSuccessAddingCard(){
+        this.cardView.OnSuccessAddingCard()
+    }
+
+    override fun OnErrorAddingCard(message: String){
+        this.cardView.OnErrorAddingCard(message)
+    }
 }

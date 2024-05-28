@@ -8,6 +8,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.HTTP
 import retrofit2.http.Header
+import retrofit2.http.POST
 
 interface CardServices {
 
@@ -18,6 +19,12 @@ interface CardServices {
 
     @HTTP(method = "PUT", path = "/api/cards", hasBody = true)
     fun EditCard(
+        @Header("Authorization") str: String,
+        @Body product: Card
+    ): Call<Wrapper<ResponseService>>
+
+    @POST("/api/cards")
+    fun AddCard(
         @Header("Authorization") str: String,
         @Body product: Card
     ): Call<Wrapper<ResponseService>>

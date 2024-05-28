@@ -11,4 +11,8 @@ interface CardView {
     fun OnSuccessEditCard(){}
 
     fun OnErrorEditCard(message: String){}
+
+    fun OnSuccessAddingCard(){}
+
+    fun OnErrorAddingCard(message: String){}
 }
