@@ -12,6 +12,7 @@ import com.example.matchparfait.R
 import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
+import com.example.matchparfait.utils.Helpers
 
 interface OnProductClickListener {
     fun onProductClick(product: Product){}
@@ -42,7 +43,7 @@ class ProductAdapter(private val productList: List<Product>, private val listene
             .load(product.photo)
             .into(holder.productImage)
 
-        if(product.classification != "0" &&   product.classification != null  && product.classification != ""){
+        if(product.classification != "" && Helpers.getUser().classification == product.classification){
             holder.poductRecommended.visibility = View.VISIBLE
         }
         else{

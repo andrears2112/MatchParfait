@@ -43,7 +43,7 @@ class ShopBagAdapter(private val productList: MutableList<ProductShopBag>, priva
             holder.productColor.visibility = View.GONE
         }
 
-        if (product.classification != "0" && product.classification != null && product.classification != "") {
+        if (product.classification != "" && Helpers.getUser().classification == product.classification) {
             holder.poductRecommended.visibility = View.VISIBLE
         } else {
             holder.poductRecommended.visibility = View.GONE

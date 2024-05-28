@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.matchparfait.R
 import com.example.matchparfait.model.entitys.ProductWishList
+import com.example.matchparfait.utils.Helpers
 
 class WishListAdapter(private val productList: MutableList<ProductWishList>, private val listener: OnProductClickListener) : RecyclerView.Adapter<WishListAdapter.ProductViewHolder>(){
 
@@ -40,7 +41,7 @@ class WishListAdapter(private val productList: MutableList<ProductWishList>, pri
             holder.productColor.visibility = View.GONE
         }
 
-        if (product.classification != "0" && product.classification != null && product.classification != "") {
+        if (product.classification != "" && Helpers.getUser().classification == product.classification) {
             holder.poductRecommended.visibility = View.VISIBLE
         } else {
             holder.poductRecommended.visibility = View.GONE
