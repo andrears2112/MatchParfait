@@ -47,7 +47,7 @@
             android:fontFamily="@font/dm_sans_regular"
             android:hint="Contraseña"
             android:singleLine="true"
-            android:textSize="17sp"
+            android:textSize="17dp"
             android:textColor="@color/text_dark"
             android:textColorHint="@color/text_hint"
             android:inputType="textPassword"/>
