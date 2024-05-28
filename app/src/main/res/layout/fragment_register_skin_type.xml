@@ -92,8 +92,7 @@
                     style="@style/CustomChipStyle"
                     android:text="Normal"
                     android:checkable="true"
-                    android:clickable="true"
-                    app:rippleColor="@color/principal"/>
+                    android:clickable="true"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_sensible"
@@ -101,9 +100,7 @@
                     android:layout_height="wrap_content"
                     style="@style/CustomChipStyle"
                     android:text="Sensible"
-                    android:checkable="true"
-                    android:clickable="true"
-                    app:rippleColor="@color/principal"/>
+                    android:checkable="true"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_dry"
@@ -112,8 +109,7 @@
                     style="@style/CustomChipStyle"
                     android:text="Seca"
                     android:checkable="true"
-                    android:clickable="true"
-                    app:rippleColor="@color/principal"/>
+                    android:clickable="true"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_oild"
@@ -122,8 +118,7 @@
                     style="@style/CustomChipStyle"
                     android:text="Grasa"
                     android:checkable="true"
-                    android:clickable="true"
-                    app:rippleColor="@color/principal"/>
+                    android:clickable="true"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_mix"
@@ -132,8 +127,7 @@
                     style="@style/CustomChipStyle"
                     android:text="Mixta"
                     android:checkable="true"
-                    android:clickable="true"
-                    app:rippleColor="@color/principal"/>
+                    android:clickable="true"/>
 
 
             </com.google.android.material.chip.ChipGroup>
@@ -181,8 +175,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Brillo a final del día"
-                    app:rippleColor="@color/principal" />
+                    android:text="Brillo a final del día"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/shine_midle_day"
@@ -191,8 +184,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Brillo a medio día"
-                    app:rippleColor="@color/principal" />
+                    android:text="Brillo a medio día" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/without_shine"
@@ -201,8 +193,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Sin brillo en el día"
-                    app:rippleColor="@color/principal" />
+                    android:text="Sin brillo en el día"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/shine_t"
@@ -211,8 +202,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Brillo en zona T"
-                    app:rippleColor="@color/principal" />
+                    android:text="Brillo en zona T" />
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -245,8 +235,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Atópica"
-                    app:rippleColor="@color/principal" />
+                    android:text="Atópica" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/contact"
@@ -255,8 +244,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Por contacto"
-                    app:rippleColor="@color/principal" />
+                    android:text="Por contacto"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/seborreic"
@@ -265,8 +253,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Seborreica"
-                    app:rippleColor="@color/principal" />
+                    android:text="Seborreica" />
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -299,8 +286,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Tirantez"
-                    app:rippleColor="@color/principal" />
+                    android:text="Tirantez" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/rosacea"
@@ -309,8 +295,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Rosacea"
-                    app:rippleColor="@color/principal" />
+                    android:text="Rosacea"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/peeling"
@@ -319,8 +304,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Descamación"
-                    app:rippleColor="@color/principal" />
+                    android:text="Descamación" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/hives"
@@ -329,8 +313,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Urticaria"
-                    app:rippleColor="@color/principal" />
+                    android:text="Urticaria"/>
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -363,8 +346,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Acne"
-                    app:rippleColor="@color/principal" />
+                    android:text="Acne" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/enlarged_pores"
@@ -373,8 +355,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Poros dilatados"
-                    app:rippleColor="@color/principal" />
+                    android:text="Poros dilatados" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/sun_spots"
@@ -383,8 +364,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Manchas de sol"
-                    app:rippleColor="@color/principal" />
+                    android:text="Manchas de sol"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/cloth"
@@ -393,8 +373,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Paño"
-                    app:rippleColor="@color/principal" />
+                    android:text="Paño" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/blackheads"
@@ -403,8 +382,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Puntos negros"
-                    app:rippleColor="@color/principal" />
+                    android:text="Puntos negros" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/roughness"
@@ -413,8 +391,7 @@
                     android:layout_height="wrap_content"
                     android:checkable="true"
                     android:clickable="true"
-                    android:text="Senseción aspera"
-                    app:rippleColor="@color/principal" />
+                    android:text="Senseción aspera" />
 
             </com.google.android.material.chip.ChipGroup>
 
