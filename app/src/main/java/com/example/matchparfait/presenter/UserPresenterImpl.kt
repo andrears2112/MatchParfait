@@ -2,6 +2,7 @@ package com.example.matchparfait.presenter
 
 import android.content.Context
 import com.example.matchparfait.model.entitys.AddressUser
+import com.example.matchparfait.model.entitys.User
 import com.example.matchparfait.model.repositoy.UserRepositoryImpl
 import com.example.matchparfait.model.repositoy.interfaces.UserRepository
 import com.example.matchparfait.presenter.interfaces.UserPresenter
@@ -41,5 +42,17 @@ class UserPresenterImpl(view : UserView, context: Context) : UserPresenter {
 
     override fun OnErrorEditingAddress(message: String){
         this.userView.OnErrorEditingAddress(message)
+    }
+
+    override fun RegisterUser(user : User){
+        this.userRepo.RegisterUser(user)
+    }
+
+    override fun OnRegisterSuccess(){
+        this.userView.OnRegisterSuccess()
+    }
+
+    override fun OnErrorRegisterSuccess(message: String){
+        this.userView.OnErrorRegisterSuccess(message)
     }
 }

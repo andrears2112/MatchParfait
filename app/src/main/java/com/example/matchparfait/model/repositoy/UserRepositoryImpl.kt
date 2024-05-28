@@ -8,6 +8,7 @@ import com.example.matchparfait.model.dataSources.ServiceResponse
 import com.example.matchparfait.model.dataSources.Wrapper
 import com.example.matchparfait.model.entitys.AddressUser
 import com.example.matchparfait.model.entitys.ResponseService
+import com.example.matchparfait.model.entitys.User
 import com.example.matchparfait.model.remote.ProductsServices
 import com.example.matchparfait.model.remote.UserServices
 import com.example.matchparfait.model.repositoy.interfaces.UserRepository
@@ -75,6 +76,31 @@ class UserRepositoryImpl(userPresenter: UserPresenter, context: Context) :
                     }
                     else {
                         userPresenter.OnErrorEditingAddress(body.body()!!.userMsg)
+                    }
+                }
+            }
+        )
+    }
+
+    override fun RegisterUser(user: User) {
+        this.responseService.GetRequestForObject(
+            this.appServiceClient?.GetDefaultConnectionWithServices()?.
+            create(UserServices::class.java)!!.RegisterUser(user),
+            object : ResultInterface<Wrapper<ResponseService>> {
+                override fun failWithError(message: String) {
+                    userPresenter.OnErrorRegisterSuccess(message)
+                }
+
+                override fun notFound(message: String) {
+                    userPresenter.OnErrorRegisterSuccess(message)
+                }
+
+                override fun success(body: Response<Wrapper<ResponseService>>) {
+                    if(CheckObjectResult(body.body()!!)){
+                        userPresenter.OnRegisterSuccess()
+                    }
+                    else {
+                        userPresenter.OnErrorRegisterSuccess(body.body()!!.userMsg)
                     }
                 }
             }
