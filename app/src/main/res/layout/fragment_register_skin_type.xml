@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_register">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/playfair_display_regular"
+        android:text="Prefil de piel"
+        android:textAlignment="center"
+        android:textColor="@color/secondary"
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/dm_sans_regular"
+        android:padding="10dp"
+        android:text="Selecciona las opciones que describan tu piel, así podremos encontrar los mejores productos para ti. Desliza hasta el final para ver todas las opciones."
+        android:textColor="@color/subheadings"
+        android:textSize="16dp" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/subtitle"
+        android:layout_alignBottom="@+id/line"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:id="@+id/linear"
+            android:layout_below="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_app">
+
+            <LinearLayout
+                android:id="@+id/title_texture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginEnd="20dp">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_sparkles" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="Tipo de piel"
+                    android:textColor="@color/subheadings"
+                    android:textSize="18dp"
+                    android:fontFamily="@font/dm_sans_regular"/>
+
+            </LinearLayout>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/group_texture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:singleSelection="true"
+                android:layout_below="@+id/title_texture">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomChipStyle"
+                    android:text="Normal"
+                    android:checkable="true"
+                    android:clickable="true"
+                    app:rippleColor="@color/principal"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_sensible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomChipStyle"
+                    android:text="Sensible"
+                    android:checkable="true"
+                    android:clickable="true"
+                    app:rippleColor="@color/principal"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_dry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomChipStyle"
+                    android:text="Seca"
+                    android:checkable="true"
+                    android:clickable="true"
+                    app:rippleColor="@color/principal"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_oild"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomChipStyle"
+                    android:text="Grasa"
+                    android:checkable="true"
+                    android:clickable="true"
+                    app:rippleColor="@color/principal"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_mix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomChipStyle"
+                    android:text="Mixta"
+                    android:checkable="true"
+                    android:clickable="true"
+                    app:rippleColor="@color/principal"/>
+
+
+            </com.google.android.material.chip.ChipGroup>
+
+
+            <LinearLayout
+                android:id="@+id/title_shine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/group_texture"
+                android:layout_marginEnd="20dp"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_sparkles" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dm_sans_regular"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="Brillo"
+                    android:textColor="@color/subheadings"
+                    android:textSize="18dp" />
+
+            </LinearLayout>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/group_shine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_shine"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/shine_end_day"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Brillo a final del día"
+                    app:rippleColor="@color/principal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/shine_midle_day"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Brillo a medio día"
+                    app:rippleColor="@color/principal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/without_shine"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Sin brillo en el día"
+                    app:rippleColor="@color/principal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/shine_t"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Brillo en zona T"
+                    app:rippleColor="@color/principal" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:id="@+id/tittle_dermatitis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/group_shine"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:padding="10dp"
+                android:text="Dermatitis"
+                android:textColor="@color/subheadings"
+                android:textSize="18dp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/group_dermatitis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tittle_dermatitis"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/atopic"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Atópica"
+                    app:rippleColor="@color/principal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/contact"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Por contacto"
+                    app:rippleColor="@color/principal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/seborreic"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Seborreica"
+                    app:rippleColor="@color/principal" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:id="@+id/title_sensibility"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/group_dermatitis"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:padding="10dp"
+                android:text="Sensibilidad"
+                android:textColor="@color/subheadings"
+                android:textSize="18dp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/group_sensibility"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_sensibility"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:singleSelection="false">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/tighness"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Tirantez"
+                    app:rippleColor="@color/principal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/rosacea"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Rosacea"
+                    app:rippleColor="@color/principal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/peeling"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Descamación"
+                    app:rippleColor="@color/principal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/hives"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Urticaria"
+                    app:rippleColor="@color/principal" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:id="@+id/title_imperfections"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/group_sensibility"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/dm_sans_regular"
+                android:padding="10dp"
+                android:text="Imperfecciones"
+                android:textColor="@color/subheadings"
+                android:textSize="18dp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/group_imperfections"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_imperfections"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                app:singleSelection="false">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/acne"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Acne"
+                    app:rippleColor="@color/principal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/enlarged_pores"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Poros dilatados"
+                    app:rippleColor="@color/principal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/sun_spots"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Manchas de sol"
+                    app:rippleColor="@color/principal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/cloth"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Paño"
+                    app:rippleColor="@color/principal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/blackheads"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Puntos negros"
+                    app:rippleColor="@color/principal" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/roughness"
+                    style="@style/CustomChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:text="Senseción aspera"
+                    app:rippleColor="@color/principal" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/message"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="#E7E4DE" />
+
+    <LinearLayout
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/continue_btn"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_sparkles" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/group_texture"
+            android:fontFamily="@font/dm_sans_regular"
+            android:text="Campos obligatorios"
+            android:textColor="@color/subheadings"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/continue_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_register"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:fontFamily="@font/dm_sans_regular"
+        android:padding="10dp"
+        android:text="Continuar"
+        android:textColor="#FFFCF7"
+        android:textSize="17dp"
+        app:backgroundTint="@color/secondary" />
+
+    <TextView
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="28dp"
+        android:fontFamily="@font/dm_sans_regular"
+        android:text="¿Ya tienes una cuenta? Inicia sesión"
+        android:textAlignment="center"
+        android:textColor="@color/secondary"
+        android:textSize="18dp"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
