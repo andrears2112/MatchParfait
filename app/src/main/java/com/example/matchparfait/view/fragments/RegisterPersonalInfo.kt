@@ -125,9 +125,10 @@ class RegisterPersonalInfo : Fragment(), View.OnClickListener {
                 val user = User()
                 user.email = this.mail.text.toString()
                 user.name = this.name.text.toString()
-                user.last_name1 = this.lastName.text.toString()
-                user.last_name2 = this.lastMotherName.text.toString()
+                user.lastName1 = this.lastName.text.toString()
+                user.lastName2 = this.lastMotherName.text.toString()
                 user.password = this.password.text.toString()
+                user.plainPassword = this.password.text.toString()
                 user.phone_number = this.num.text.toString()
                 user.gender = this.genderSelected
                 user.date_of_birth = this.birthDate.getSelectedYear().toString()+"-"+this.birthDate.getSelectedMonth().toString()+"-"+this.birthDate.getSelectedDay().toString()
