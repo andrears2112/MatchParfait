@@ -15,6 +15,7 @@ class Helpers {
         private lateinit var total : String
         private lateinit var editAddress : AddressUser
         private lateinit var card : Card
+        private lateinit var userRegister : User
 
         fun startSession(token : String, user : User){
             this.actualUser = user
@@ -67,6 +68,14 @@ class Helpers {
 
         fun getCard() : Card{
             return this.card
+        }
+
+        fun saveUserToRegister(user : User){
+            this.userRegister = user
+        }
+
+        fun getUserToRegister() : User {
+            return this.userRegister
         }
     }
 }
