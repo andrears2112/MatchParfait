@@ -35,7 +35,7 @@ data class User(
     var blackheads : Int = 0,
     var roughness : Int = 0,
     var tone : Int = 0,
-    var classification : Int = 0
+    var classification : String = ""
 )
 
 data class AddressUser(
