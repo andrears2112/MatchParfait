@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_register"
+    app:startDestination="@id/personal_info">
+
+    <fragment android:id="@+id/personal_info"
+        android:name="com.example.matchparfait.view.fragments.RegisterPersonalInfo"
+        tools:layout="@layout/fragment_register_personal_info">
+        <action
+            android:id="@+id/action_personal_info_to_address_info"
+            app:destination="@id/address_info" />
+    </fragment>
+    <fragment android:id="@+id/address_info"
+        android:name="com.example.matchparfait.view.fragments.RegisterAddress"
+        tools:layout="@layout/fragment_register_address">
+        <action
+            android:id="@+id/action_address_info_to_skin_info"
+            app:destination="@id/skin_info" />
+    </fragment>
+    <fragment android:id="@+id/skin_info"
+        android:name="com.example.matchparfait.view.fragments.RegisterSkinType"
+        tools:layout="@layout/fragment_register_skin_type">
+        <action
+            android:id="@+id/action_skin_info_to_skin_tone"
+            app:destination="@id/skin_tone" />
+    </fragment>
+    <fragment android:id="@+id/skin_tone"
+        android:name="com.example.matchparfait.view.fragments.RegisterSkinTone"
+        tools:layout="@layout/fragment_register_skin_tone"/>
+</navigation>
