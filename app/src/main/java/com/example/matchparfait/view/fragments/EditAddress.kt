@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.matchparfait.R
@@ -74,14 +75,38 @@ class EditAddress : Fragment(), View.OnClickListener, UserView {
         this.postal_code.setText(address.postal_code)
     }
 
+    fun validateAddressInputs(): Boolean {
+        val editTexts = listOf(state, municipality, suburb, street, num_ext, postal_code)
+        var isValid = true
+
+        for (editText in editTexts) {
+            if (editText.text.toString().trim().isEmpty()) {
+                editText.error = "${editText.hint} no puede estar vacío"
+                editText.requestFocus()
+                isValid = false
+                break
+            }
+        }
+
+        if (postal_code.text.toString().trim().length != 5) {
+            postal_code.error = "El código postal debe tener 5 caracteres"
+            postal_code.requestFocus()
+            isValid = false
+        }
+
+        return isValid
+    }
+
     override fun onClick(p0: View?) {
         if(p0!!.id == this.cancelBtn.id){
             findNavController().navigate(R.id.payment )
         }
         if(p0.id == this.saveBtn.id){
-            this.loadingServices.show()
-            val address = AddressUser("México", this.state.text.toString(), this.municipality.text.toString(), this.postal_code.text.toString(), this.suburb.text.toString(), this.street.text.toString(), this.num_ext.text.toString(), this.num_int.text.toString())
-            this.presenterUser.EditAddress(address)
+            if(validateAddressInputs()){
+                this.loadingServices.show()
+                val address = AddressUser("México", this.state.text.toString(), this.municipality.text.toString(), this.postal_code.text.toString(), this.suburb.text.toString(), this.street.text.toString(), this.num_ext.text.toString(), this.num_int.text.toString())
+                this.presenterUser.EditAddress(address)
+            }
         }
     }
 
