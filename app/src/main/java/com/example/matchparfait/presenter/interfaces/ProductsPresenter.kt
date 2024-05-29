@@ -1,5 +1,6 @@
 package com.example.matchparfait.presenter.interfaces
 
+import com.example.matchparfait.model.entitys.CommentRequest
 import com.example.matchparfait.model.entitys.PayRequest
 import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.ProductShopBag
@@ -63,4 +64,10 @@ interface ProductsPresenter {
     fun OnSuccessPayment(){}
 
     fun OnErrorPayment(message: String){}
+
+    fun CommentProduct(commentRequest: CommentRequest){}
+
+    fun OnSuccessComment(){}
+
+    fun OnErrorComment(message: String){}
 }

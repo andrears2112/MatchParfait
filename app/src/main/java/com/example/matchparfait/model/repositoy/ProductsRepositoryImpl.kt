@@ -6,6 +6,7 @@ import com.example.matchparfait.model.dataSources.CheckObjectResult
 import com.example.matchparfait.model.dataSources.ResultInterface
 import com.example.matchparfait.model.dataSources.ServiceResponse
 import com.example.matchparfait.model.dataSources.Wrapper
+import com.example.matchparfait.model.entitys.CommentRequest
 import com.example.matchparfait.model.entitys.PayRequest
 import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.ProductShopBag
@@ -257,6 +258,31 @@ class ProductsRepositoryImpl(productsPresenter: ProductsPresenter, context: Cont
                     }
                     else {
                         prodPresenter.OnErrorPayment(body.body()!!.userMsg)
+                    }
+                }
+            }
+        )
+    }
+
+    override fun CommentProduct(commentRequest: CommentRequest) {
+        this.responseService.GetRequestForObject(
+            this.appServiceClient?.GetDefaultConnectionWithServices()?.
+            create(ProductsServices::class.java)!!.CommentProduct(Helpers.getToken(), commentRequest),
+            object : ResultInterface<Wrapper<ResponseService>> {
+                override fun failWithError(message: String) {
+                    prodPresenter.OnErrorComment(message)
+                }
+
+                override fun notFound(message: String) {
+                    prodPresenter.OnErrorComment(message)
+                }
+
+                override fun success(body: Response<Wrapper<ResponseService>>) {
+                    if(CheckObjectResult(body.body()!!)){
+                        prodPresenter.OnSuccessComment()
+                    }
+                    else {
+                        prodPresenter.OnErrorComment(body.body()!!.userMsg)
                     }
                 }
             }

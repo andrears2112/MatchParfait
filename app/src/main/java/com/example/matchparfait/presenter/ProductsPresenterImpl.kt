@@ -1,6 +1,7 @@
 package com.example.matchparfait.presenter
 
 import android.content.Context
+import com.example.matchparfait.model.entitys.CommentRequest
 import com.example.matchparfait.model.entitys.PayRequest
 import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.ProductShopBag
@@ -131,5 +132,17 @@ class ProductsPresenterImpl(view : ProductsView, context: Context) : ProductsPre
 
     override fun OnErrorPayment(message: String){
         this.OnErrorPayment(message)
+    }
+
+    override fun CommentProduct(commentRequest: CommentRequest){
+        this.productsRepo.CommentProduct(commentRequest)
+    }
+
+    override fun OnSuccessComment(){
+        this.productsView.OnSuccessComment()
+    }
+
+    override fun OnErrorComment(message: String){
+        this.productsView.OnErrorComment(message)
     }
 }
