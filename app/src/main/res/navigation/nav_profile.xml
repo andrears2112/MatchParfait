@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_profile"
+    app:startDestination="@id/init">
+
+    <fragment android:id="@+id/init"
+        android:name="com.example.matchparfait.view.fragments.ProfileInit"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_init_to_edit_payType"
+            app:destination="@id/edit_payType" />
+        <action
+            android:id="@+id/action_init_to_editAddress_profile"
+            app:destination="@id/editAddress_profile" />
+        <action
+            android:id="@+id/action_init_to_history"
+            app:destination="@id/history" />
+    </fragment>
+    <fragment android:id="@+id/editAddress_profile"
+        android:name="com.example.matchparfait.view.fragments.EditAddress"
+        tools:layout="@layout/fragment_edit_address"/>
+    <fragment android:id="@+id/edit_payType"
+        android:name="com.example.matchparfait.view.fragments.EditCard"
+        tools:layout="@layout/fragment_edit_card"/>
+    <fragment android:id="@+id/history"
+        android:name="com.example.matchparfait.view.fragments.History"
+        tools:layout="@layout/fragment_recycler_basic">
+        <action
+            android:id="@+id/action_history_to_historyDetail"
+            app:destination="@id/historyDetail" />
+    </fragment>
+    <fragment android:id="@+id/historyDetail"
+        android:name="com.example.matchparfait.view.fragments.HistoryDetail"
+        tools:layout="@layout/fragment_history_detail"/>
+
+</navigation>
