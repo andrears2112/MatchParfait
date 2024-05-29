@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.matchparfait.BasicRecycler
 import com.example.matchparfait.R
 import com.example.matchparfait.model.entitys.Product
@@ -78,29 +79,19 @@ class Principal : Fragment(), View.OnClickListener, LoginView, ProductsView {
 
     override fun onClick(p0: View?) {
         if(p0!!.id == this.wish_btn.id){
-            editor.putString("source", "Wish List")
-            editor.apply()
-            startActivity(Intent(this.requireContext(), WishList::class.java))
+            findNavController().navigate(R.id.wishList)
         }
         if(p0!!.id == this.nails_btn.id){
-            editor.putString("source", "Uñas")
-            editor.apply()
-            startActivity(Intent(this.requireContext(), BasicRecycler::class.java))
+            findNavController().navigate(R.id.searchProduct)
         }
         if(p0!!.id == this.makeup_btn.id){
-            editor.putString("source", "Maquillaje")
-            editor.apply()
-            startActivity(Intent(this.requireContext(), BasicRecycler::class.java))
+            findNavController().navigate(R.id.searchProduct)
         }
         if(p0!!.id == this.skincare_btn.id){
-            editor.putString("source", "Cuidado de la Piel")
-            editor.apply()
-            startActivity(Intent(this.requireContext(), BasicRecycler::class.java))
+            findNavController().navigate(R.id.searchProduct)
         }
         if(p0!!.id == this.hair_btn.id){
-            editor.putString("source", "Cabello")
-            editor.apply()
-            startActivity(Intent(this.requireContext(), BasicRecycler::class.java))
+            findNavController().navigate(R.id.searchProduct)
         }
     }
 
