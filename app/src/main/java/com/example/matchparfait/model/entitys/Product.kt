@@ -13,6 +13,7 @@ data class Product(
     var photo: String = "",
     var description : String = "",
     var ingredients : String = "",
+    var color : String = "",
     var colors : String = "",
     var photos : String = "",
     var type : String = "",
