@@ -8,7 +8,6 @@ import com.example.matchparfait.model.dataSources.ServiceResponse
 import com.example.matchparfait.model.dataSources.Wrapper
 import com.example.matchparfait.model.entitys.AddressUser
 import com.example.matchparfait.model.entitys.HistoryUser
-import com.example.matchparfait.model.entitys.ListHistory
 import com.example.matchparfait.model.entitys.ResponseService
 import com.example.matchparfait.model.entitys.User
 import com.example.matchparfait.model.remote.ProductsServices
@@ -26,7 +25,6 @@ class UserRepositoryImpl(userPresenter: UserPresenter, context: Context) :
     private var applicationContext = context
     private var responseAddress : ServiceResponse<Wrapper<AddressUser>, AddressUser> = ServiceResponse<Wrapper<AddressUser>, AddressUser>()
     private var responseService : ServiceResponse<Wrapper<ResponseService>, ResponseService> = ServiceResponse<Wrapper<ResponseService>, ResponseService>()
-    //private var responseHistory : ServiceResponseObj<WrapperObject<ListHistory>, ListHistory> = ServiceResponseObj<WrapperObject<ListHistory>, ListHistory>()
     private var responseHistory : ServiceResponse<Wrapper<HistoryUser>, HistoryUser> = ServiceResponse<Wrapper<HistoryUser>, HistoryUser>()
 
 
