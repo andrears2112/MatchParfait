@@ -46,8 +46,14 @@ class DatePicker @JvmOverloads constructor(
         monthSpinner.setSelection(Calendar.getInstance().get(Calendar.MONTH))
     }
 
-    fun getSelectedYear(): Int {
-        return yearSpinner.selectedItem as Int
+    fun getSelectedYear(): String {
+        val fullYear = yearSpinner.selectedItem as Int
+        val lastTwoDigits = fullYear % 100
+        return if (lastTwoDigits < 10) {
+            "0$lastTwoDigits"
+        } else {
+            lastTwoDigits.toString()
+        }
     }
 
     fun getSelectedMonth(): String {

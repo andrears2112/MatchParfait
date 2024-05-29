@@ -116,12 +116,13 @@ class EditCard : Fragment(), View.OnClickListener, CardView {
         if(p0.id == this.saveBtn.id){
             if(validate()){
                 this.loadingServices.show()
-                val card = Card("", this.headline.text.toString(), this.number.text.toString(), this.datePicker.getSelectedMonth()+"/"+this.datePicker.getSelectedYear().toString(), this.cvv.text.toString())
+                var card = Card("", this.headline.text.toString(), this.number.text.toString(), this.datePicker.getSelectedMonth()+"/"+this.datePicker.getSelectedYear(), this.cvv.text.toString())
 
                 if(this.cardInitial.cardNumber == ""){
                     this.cardPresenter.AddCard(card)
                 }
                 else {
+                    card.cardId = cardInitial.cardId
                     this.cardPresenter.EditCard(card)
                 }
             }
