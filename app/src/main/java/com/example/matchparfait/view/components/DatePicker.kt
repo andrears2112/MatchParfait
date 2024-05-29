@@ -50,8 +50,13 @@ class DatePicker @JvmOverloads constructor(
         return yearSpinner.selectedItem as Int
     }
 
-    fun getSelectedMonth(): Int {
-        return monthSpinner.selectedItem as Int
+    fun getSelectedMonth(): String {
+        val month = monthSpinner.selectedItem as Int
+        return if (month < 10) {
+            "0$month"
+        } else {
+            month.toString()
+        }
     }
 
     fun setSelectedYear(year: Int) {

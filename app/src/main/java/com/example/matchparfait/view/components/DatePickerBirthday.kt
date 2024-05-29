@@ -61,12 +61,22 @@ class DatePickerBirthday @JvmOverloads constructor(
         return yearSpinner.selectedItem as Int
     }
 
-    fun getSelectedMonth(): Int {
-        return monthSpinner.selectedItem as Int
+    fun getSelectedMonth(): String {
+        val month = monthSpinner.selectedItem as Int
+        return if (month < 10) {
+            "0$month"
+        } else {
+            month.toString()
+        }
     }
 
-    fun getSelectedDay(): Int {
-        return daySpinner.selectedItem as Int
+    fun getSelectedDay(): String {
+        val month = daySpinner.selectedItem as Int
+        return if (month < 10) {
+            "0$month"
+        } else {
+            month.toString()
+        }
     }
 
     fun setSelectedYear(year: Int) {
