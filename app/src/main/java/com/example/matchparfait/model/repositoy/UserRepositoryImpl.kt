@@ -7,6 +7,8 @@ import com.example.matchparfait.model.dataSources.ResultInterface
 import com.example.matchparfait.model.dataSources.ServiceResponse
 import com.example.matchparfait.model.dataSources.Wrapper
 import com.example.matchparfait.model.entitys.AddressUser
+import com.example.matchparfait.model.entitys.HistoryUser
+import com.example.matchparfait.model.entitys.ListHistory
 import com.example.matchparfait.model.entitys.ResponseService
 import com.example.matchparfait.model.entitys.User
 import com.example.matchparfait.model.remote.ProductsServices
@@ -24,6 +26,9 @@ class UserRepositoryImpl(userPresenter: UserPresenter, context: Context) :
     private var applicationContext = context
     private var responseAddress : ServiceResponse<Wrapper<AddressUser>, AddressUser> = ServiceResponse<Wrapper<AddressUser>, AddressUser>()
     private var responseService : ServiceResponse<Wrapper<ResponseService>, ResponseService> = ServiceResponse<Wrapper<ResponseService>, ResponseService>()
+    //private var responseHistory : ServiceResponseObj<WrapperObject<ListHistory>, ListHistory> = ServiceResponseObj<WrapperObject<ListHistory>, ListHistory>()
+    private var responseHistory : ServiceResponse<Wrapper<HistoryUser>, HistoryUser> = ServiceResponse<Wrapper<HistoryUser>, HistoryUser>()
+
 
     init {
         this.userPresenter = userPresenter
@@ -101,6 +106,31 @@ class UserRepositoryImpl(userPresenter: UserPresenter, context: Context) :
                     }
                     else {
                         userPresenter.OnErrorRegisterSuccess(body.body()!!.userMsg)
+                    }
+                }
+            }
+        )
+    }
+
+    override fun GetHistory() {
+        this.responseHistory.GetRequestForObject(
+            this.appServiceClient?.GetDefaultConnectionWithServices()?.
+            create(UserServices::class.java)!!.GetHistory(Helpers.getToken()),
+            object : ResultInterface<Wrapper<HistoryUser>> {
+                override fun failWithError(message: String) {
+                    userPresenter.OnErrorGettingHistory(message)
+                }
+
+                override fun notFound(message: String) {
+                    userPresenter.OnErrorGettingHistory(message)
+                }
+
+                override fun success(body: Response<Wrapper<HistoryUser>>) {
+                    if(CheckObjectResult(body.body()!!)){
+                        userPresenter.OnSuccessGetingHistory(body.body()!!.data)
+                    }
+                    else {
+                        userPresenter.OnErrorGettingHistory(body.body()!!.userMsg)
                     }
                 }
             }

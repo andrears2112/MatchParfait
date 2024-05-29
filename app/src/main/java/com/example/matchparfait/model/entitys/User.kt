@@ -52,6 +52,16 @@ data class AddressUser(
     var int_num : String = ""
 )
 
+data class HistoryUser(
+    var saleId : String = "",
+    var orderSale : Int = 0,
+    var status : String = "",
+    var totalAmount: Int = 0,
+    var estimatedDate : String = "",
+    var deadline : String = "",
+    var products : List<Product>
+)
+
 class UserFactory {
     companion object {
         fun userForLogin(mail : String, password : String) : User {

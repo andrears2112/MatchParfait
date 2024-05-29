@@ -2,6 +2,8 @@ package com.example.matchparfait.presenter
 
 import android.content.Context
 import com.example.matchparfait.model.entitys.AddressUser
+import com.example.matchparfait.model.entitys.HistoryUser
+import com.example.matchparfait.model.entitys.ListHistory
 import com.example.matchparfait.model.entitys.User
 import com.example.matchparfait.model.repositoy.UserRepositoryImpl
 import com.example.matchparfait.model.repositoy.interfaces.UserRepository
@@ -54,5 +56,17 @@ class UserPresenterImpl(view : UserView, context: Context) : UserPresenter {
 
     override fun OnErrorRegisterSuccess(message: String){
         this.userView.OnErrorRegisterSuccess(message)
+    }
+
+    override fun GetHistory(){
+        this.userRepo.GetHistory()
+    }
+
+    override fun OnSuccessGetingHistory(history : List<HistoryUser>){
+        this.userView.OnSuccessGetingHistory(history)
+    }
+
+    override fun OnErrorGettingHistory(message: String){
+        this.userView.OnErrorGettingHistory(message)
     }
 }

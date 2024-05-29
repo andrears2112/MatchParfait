@@ -2,6 +2,8 @@ package com.example.matchparfait.model.remote
 
 import com.example.matchparfait.model.dataSources.Wrapper
 import com.example.matchparfait.model.entitys.AddressUser
+import com.example.matchparfait.model.entitys.HistoryUser
+import com.example.matchparfait.model.entitys.ListHistory
 import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ResponseService
 import com.example.matchparfait.model.entitys.ShoppingCartUpdateRequest
@@ -30,4 +32,9 @@ interface UserServices {
     fun RegisterUser(
         @Body user: User
     ): Call<Wrapper<ResponseService>>
+
+    @GET("/api/sale/history")
+    fun GetHistory(
+        @Header("Authorization") str: String
+    ): Call<Wrapper<HistoryUser>>
 }

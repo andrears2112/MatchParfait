@@ -1,6 +1,8 @@
 package com.example.matchparfait.view.interfaces
 
 import com.example.matchparfait.model.entitys.AddressUser
+import com.example.matchparfait.model.entitys.HistoryUser
+import com.example.matchparfait.model.entitys.ListHistory
 import com.example.matchparfait.model.entitys.User
 
 interface UserView {
@@ -16,4 +18,8 @@ interface UserView {
     fun OnRegisterSuccess(){}
 
     fun OnErrorRegisterSuccess(message: String){}
+
+    fun OnSuccessGetingHistory(history : List<HistoryUser>){}
+
+    fun OnErrorGettingHistory(message: String){}
 }
