@@ -2,7 +2,6 @@ package com.example.matchparfait.view.interfaces
 
 import com.example.matchparfait.model.entitys.AddressUser
 import com.example.matchparfait.model.entitys.HistoryUser
-import com.example.matchparfait.model.entitys.ListHistory
 import com.example.matchparfait.model.entitys.User
 
 interface UserView {

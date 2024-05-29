@@ -3,7 +3,6 @@ package com.example.matchparfait.presenter.interfaces
 import com.example.matchparfait.DisableMessage
 import com.example.matchparfait.model.entitys.AddressUser
 import com.example.matchparfait.model.entitys.HistoryUser
-import com.example.matchparfait.model.entitys.ListHistory
 import com.example.matchparfait.model.entitys.User
 import com.example.matchparfait.view.fragments.History
 

@@ -3,7 +3,6 @@ package com.example.matchparfait.presenter
 import android.content.Context
 import com.example.matchparfait.model.entitys.AddressUser
 import com.example.matchparfait.model.entitys.HistoryUser
-import com.example.matchparfait.model.entitys.ListHistory
 import com.example.matchparfait.model.entitys.User
 import com.example.matchparfait.model.repositoy.UserRepositoryImpl
 import com.example.matchparfait.model.repositoy.interfaces.UserRepository
