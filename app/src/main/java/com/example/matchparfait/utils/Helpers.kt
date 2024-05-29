@@ -2,6 +2,7 @@ package com.example.matchparfait.utils
 
 import com.example.matchparfait.model.entitys.AddressUser
 import com.example.matchparfait.model.entitys.Card
+import com.example.matchparfait.model.entitys.HistoryUser
 import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.User
 
@@ -17,6 +18,7 @@ class Helpers {
         private lateinit var card : Card
         private lateinit var userRegister : User
         private lateinit var sourceEdit : String
+        private lateinit var order : HistoryUser
 
         fun startSession(token : String, user : User){
             this.actualUser = user
@@ -89,6 +91,14 @@ class Helpers {
 
         fun destroySession(){
             this.actualUser = User()
+        }
+
+        fun saveOrderSelected(order : HistoryUser){
+            this.order = order
+        }
+
+        fun getOrderSelected() : HistoryUser{
+            return this.order
         }
     }
 }
