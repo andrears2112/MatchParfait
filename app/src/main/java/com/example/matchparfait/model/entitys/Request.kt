@@ -22,3 +22,10 @@ data class PayRequest(
     val totalAmount : String = "",
     val cardId : String = ""
 )
+
+data class CommentRequest(
+    var productId : String = "",
+    var score : Int = 0,
+    var comment : String = "",
+    var matchScore : Int = 0
+)
