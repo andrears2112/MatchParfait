@@ -10,6 +10,8 @@ data class User(
     var name : String = "",
     var lastName1 : String = "",
     var lastName2 : String = "",
+    var last_name1 : String = "",
+    var last_name2 : String = "",
     var phone_number : String = "",
     var password : String = "",
     var date_of_birth : String = "",
