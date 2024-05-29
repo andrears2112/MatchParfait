@@ -16,6 +16,7 @@ class Helpers {
         private lateinit var editAddress : AddressUser
         private lateinit var card : Card
         private lateinit var userRegister : User
+        private lateinit var sourceEdit : String
 
         fun startSession(token : String, user : User){
             this.actualUser = user
@@ -76,6 +77,18 @@ class Helpers {
 
         fun getUserToRegister() : User {
             return this.userRegister
+        }
+
+        fun setSourceEdit(source : String){
+            this.sourceEdit = source
+        }
+
+        fun getSourceEdit() : String{
+            return this.sourceEdit
+        }
+
+        fun destroySession(){
+            this.actualUser = User()
         }
     }
 }
