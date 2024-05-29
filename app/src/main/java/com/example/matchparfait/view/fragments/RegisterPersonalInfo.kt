@@ -131,7 +131,7 @@ class RegisterPersonalInfo : Fragment(), View.OnClickListener {
                 user.plainPassword = this.password.text.toString()
                 user.phone_number = this.num.text.toString()
                 user.gender = this.genderSelected
-                user.date_of_birth = this.birthDate.getSelectedYear().toString()+"-"+this.birthDate.getSelectedMonth().toString()+"-"+this.birthDate.getSelectedDay().toString()
+                user.date_of_birth = this.birthDate.getSelectedYear().toString()+"-"+this.birthDate.getSelectedMonth()+"-"+this.birthDate.getSelectedDay()
 
                 Helpers.saveUserToRegister(user)
                 findNavController().navigate(R.id.address_info)
