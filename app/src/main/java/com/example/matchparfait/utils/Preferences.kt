@@ -23,4 +23,9 @@ class Preferences<T>(context: Context) {
         }
         return "NOT_FOUND"
     }
+
+    fun RemovePreference(name: String) {
+        val editor = preferences.edit()
+        editor.remove(name).apply()
+    }
 }
