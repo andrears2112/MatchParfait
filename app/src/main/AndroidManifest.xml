@@ -25,6 +25,7 @@
         </activity>
         <activity android:name=".BasicRecycler"/>
         <activity android:name=".DisableMessage"/>
+        <activity android:name=".view.activities.Profile"/>
         <activity android:name=".view.activities.Register"/>
         <activity android:name=".view.activities.Main"/>
         <activity android:name=".view.activities.Login"/>
