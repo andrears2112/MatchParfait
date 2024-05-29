@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.matchparfait.R
+import com.example.matchparfait.model.entitys.HistoryUser
 import com.example.matchparfait.model.entitys.Product
 import com.example.matchparfait.model.entitys.ProductShopBag
 import com.example.matchparfait.model.entitys.ProductWishList
@@ -22,6 +23,7 @@ interface OnProductClickListener {
     fun onRemoveWishList(product: ProductWishList){}
     fun onProductClickShopBag(product: ProductShopBag){}
     fun onRemoveShopBag(product: ProductShopBag){}
+    fun onClickHistory(item : HistoryUser){}
 }
 
 class ProductAdapter(private val productList: List<Product>, private val listener: OnProductClickListener) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
