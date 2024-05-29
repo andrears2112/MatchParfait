@@ -124,7 +124,7 @@ class UserRepositoryImpl(userPresenter: UserPresenter, context: Context) :
                 }
 
                 override fun success(body: Response<Wrapper<HistoryUser>>) {
-                    if(CheckObjectResult(body.body()!!)){
+                    if(body.body()!!.userMsg == ""){
                         userPresenter.OnSuccessGetingHistory(body.body()!!.data)
                     }
                     else {
