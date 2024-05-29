@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -24,7 +23,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".BasicRecycler"/>
-        <activity android:name=".DisableMessage"/>
         <activity android:name=".view.activities.Profile"/>
         <activity android:name=".view.activities.Register"/>
         <activity android:name=".view.activities.Main"/>
