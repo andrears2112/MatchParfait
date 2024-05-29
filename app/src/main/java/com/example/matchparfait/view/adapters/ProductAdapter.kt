@@ -37,7 +37,7 @@ class ProductAdapter(private val productList: List<Product>, private val listene
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        val product = productList[position]
+        val product = filteredProductList[position]
         holder.productName.text = product.productName
         holder.productBrand.text = product.productBrand
         holder.productPrice.text = "$${product.price}.00"
@@ -62,7 +62,7 @@ class ProductAdapter(private val productList: List<Product>, private val listene
         }
     }
 
-    override fun getItemCount() = productList.size
+    override fun getItemCount() = filteredProductList.size
 
     class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productImage: ImageView = itemView.findViewById(R.id.img_product)
