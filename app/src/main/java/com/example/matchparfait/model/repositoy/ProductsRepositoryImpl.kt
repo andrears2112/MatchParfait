@@ -53,8 +53,9 @@ class ProductsRepositoryImpl(productsPresenter: ProductsPresenter, context: Cont
 
                 override fun success(body: Response<Wrapper<Product>>) {
                     if(CheckObjectResult(body.body()!!)){
-                        Helpers.saveProducts(body.body()!!.data)
-                        prodPresenter.OnProductsGetted(body.body()!!.data)
+                        val list = body.body()!!.data.sortedWith(compareByDescending { it.classification == Helpers.getUser().classification })
+                        Helpers.saveProducts(list)
+                        prodPresenter.OnProductsGetted(list)
                     }
                     else {
                         prodPresenter.OnErrorGettingProducts(body.body()!!.userMsg)
@@ -129,7 +130,8 @@ class ProductsRepositoryImpl(productsPresenter: ProductsPresenter, context: Cont
 
                 override fun success(body: Response<Wrapper<ProductWishList>>) {
                     if(body.body()!!.userMsg.isEmpty()){
-                        prodPresenter.OnWishListGetted(body.body()!!.data)
+                        val list = body.body()!!.data.sortedWith(compareByDescending { it.classification == Helpers.getUser().classification })
+                        prodPresenter.OnWishListGetted(list)
                     }
                     else {
                         prodPresenter.OnErrorGettingWishList(body.body()!!.userMsg)
@@ -179,7 +181,8 @@ class ProductsRepositoryImpl(productsPresenter: ProductsPresenter, context: Cont
 
                 override fun success(body: Response<Wrapper<ProductShopBag>>) {
                     if(body.body()!!.userMsg.isEmpty()){
-                        prodPresenter.OnSuccesGettingCart(body.body()!!.data)
+                        val list = body.body()!!.data.sortedWith(compareByDescending { it.classification == Helpers.getUser().classification })
+                        prodPresenter.OnSuccesGettingCart(list)
                     }
                     else {
                         prodPresenter.OnErrorGettingCart(body.body()!!.userMsg)
