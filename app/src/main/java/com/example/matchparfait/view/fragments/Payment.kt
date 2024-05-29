@@ -146,10 +146,12 @@ class Payment : Fragment(), View.OnClickListener, UserView, ProductsView, CardVi
 
     override fun onClick(p0: View?) {
         if(p0!!.id == this.editAddress.id){
+            Helpers.setSourceEdit("payment")
             Helpers.saveAddressToEdit(this.completeAddress)
             findNavController().navigate(R.id.editAddress)
         }
         if(p0.id == this.editCard.id){
+            Helpers.setSourceEdit("payment")
             Helpers.saveCard(this.actualCard)
             findNavController().navigate(R.id.editCard)
         }
