@@ -24,6 +24,7 @@ interface OnProductClickListener {
     fun onProductClickShopBag(product: ProductShopBag){}
     fun onRemoveShopBag(product: ProductShopBag){}
     fun onClickHistory(item : HistoryUser){}
+    fun onClickComment(product: Product){}
 }
 
 class ProductAdapter(private val productList: List<Product>, private val listener: OnProductClickListener) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
