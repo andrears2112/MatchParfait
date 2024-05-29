@@ -32,6 +32,7 @@ class EditCard : Fragment(), View.OnClickListener, CardView {
     private lateinit var cardPresenter : CardPresenter
     private lateinit var loadingServices : Loading
     private lateinit var alertDialog : AlertDialog
+    private lateinit var cardInitial: Card
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +47,12 @@ class EditCard : Fragment(), View.OnClickListener, CardView {
 
         this.cardPresenter = CardPresenterImpl(this, this.requireContext())
         this.alertDialog = AlertDialog(this.requireContext()){
-            findNavController().navigate(R.id.payment)
+            if(Helpers.getSourceEdit() == "profile"){
+                findNavController().navigate(R.id.init )
+            }
+            else {
+                findNavController().navigate(R.id.payment )
+            }
         }
         this.loadingServices = Loading(this.requireContext())
         headline = view.findViewById(R.id.headline)
@@ -56,29 +62,85 @@ class EditCard : Fragment(), View.OnClickListener, CardView {
         saveBtn = view.findViewById(R.id.save_btn)
         cancelBtn = view.findViewById(R.id.cancelBtn)
 
-        val card = Helpers.getCard()
+        this.cardInitial = Helpers.getCard()
 
-        if(card.cardNumber != ""){
-            this.headline.setText(card.titular)
-            this.number.setText(card.cardNumber)
-            this.cvv.setText(card.cvv)
-            this.datePicker.setSelectedYear(card.expDate.substring(0, 2).toInt())
-            this.datePicker.setSelectedMonth(card.expDate.substring(card.expDate.length - 2).toInt())
+        if(cardInitial.cardNumber != ""){
+            this.headline.setText(cardInitial.titular)
+            this.number.setText(cardInitial.cardNumber)
+            this.cvv.setText(cardInitial.cvv)
+            this.datePicker.setSelectedMonth(cardInitial.expDate.substring(0, 2).toInt())
+            this.datePicker.setSelectedYear(2000 + cardInitial.expDate.substring(cardInitial.expDate.length - 2).toInt())
         }
 
         this.saveBtn.setOnClickListener(this)
         this.cancelBtn.setOnClickListener(this)
     }
 
+    fun validate() : Boolean {
+        val editTexts = listOf(headline, number, cvv)
+        var isValid = true
+
+        for (editText in editTexts) {
+            if (editText.text.toString().trim().isEmpty()) {
+                editText.error = "${editText.hint} no puede estar vacío"
+                editText.requestFocus()
+                isValid = false
+                break
+            }
+        }
+
+        if (number.text.toString().trim().length != 12) {
+            number.error = "Deben ser 12 números de la tarjeta"
+            number.requestFocus()
+            isValid = false
+        }
+
+        if (cvv.text.toString().trim().length != 3) {
+            cvv.error = "El CVV deben ser 3 números"
+            cvv.requestFocus()
+            isValid = false
+        }
+
+        return isValid
+    }
+
     override fun onClick(p0: View?) {
         if(p0!!.id == this.cancelBtn.id){
-            findNavController().navigate(R.id.payment )
+            if(Helpers.getSourceEdit() == "profile"){
+                findNavController().navigate(R.id.init )
+            }
+            else {
+                findNavController().navigate(R.id.payment )
+            }
         }
         if(p0.id == this.saveBtn.id){
-            this.loadingServices.show()
-            val card = Card("", this.headline.text.toString(), this.number.text.toString(), this.datePicker.getSelectedMonth().toString()+"/"+this.datePicker.getSelectedYear().toString(), this.cvv.text.toString())
-            this.cardPresenter.EditCard(card)
+            if(validate()){
+                this.loadingServices.show()
+                val card = Card("", this.headline.text.toString(), this.number.text.toString(), this.datePicker.getSelectedMonth()+"/"+this.datePicker.getSelectedYear().toString(), this.cvv.text.toString())
+
+                if(this.cardInitial.cardNumber == ""){
+                    this.cardPresenter.AddCard(card)
+                }
+                else {
+                    this.cardPresenter.EditCard(card)
+                }
+            }
         }
+    }
+
+    override fun OnSuccessAddingCard() {
+        this.loadingServices.dismiss()
+        this.alertDialog.setImage(R.drawable.ic_star_smile)
+        this.alertDialog.setMessage("Se agregó tu tarjeta")
+        this.alertDialog.show()
+    }
+
+    override fun OnErrorAddingCard(message: String) {
+        this.loadingServices.dismiss()
+        this.alertDialog.setImage(R.drawable.ic_star_worry)
+        this.alertDialog.setMessage(message)
+        this.alertDialog.show()
+        Log.d("ERROR EDIT CARD", message)
     }
 
     override fun OnSuccessEditCard() {
